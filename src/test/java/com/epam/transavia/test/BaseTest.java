@@ -20,19 +20,17 @@ public class BaseTest {
 
     @BeforeClass
     public WebDriver startBrowser() {
-        LOG.info("start 'startBrowser'");
+        LOG.info("Open browser");
         System.setProperty("webdriver.gecko.driver", "./src/test/resources/geckodriver.exe");
         driver = new FirefoxDriver();
         //driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        LOG.info("finish 'startBrowser'");
         return driver;
     }
 
     protected MainPage navigate(String url) {
-        LOG.info("start 'navigate;");
+        LOG.info(String.format("Open page = %s", url));
         driver.get(url);
-        LOG.info("finish 'navigate'");
         return new MainPage(driver);
     }
 
@@ -44,5 +42,6 @@ public class BaseTest {
         if (driver != null) {
             driver.quit();
         }
+        LOG.info("Close browser");
     }
 }
