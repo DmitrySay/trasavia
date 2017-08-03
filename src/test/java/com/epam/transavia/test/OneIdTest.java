@@ -8,16 +8,20 @@ import org.testng.annotations.Test;
 
 public class OneIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(OneIdTest.class);
+    private static final String HEADLINE ="Where do you want to go?";
+    private static final String DESTINATIONFROM ="Amsterdam (Schiphol), Netherlands";
+    private static final String DESTINATIONTO ="Antalya, Turkey";
+    private static final String DEPARTDATE ="20 Aug 2017";
 
 
     @Test
     public void runOneIdTest(){
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened("Where do you want to go?");
+        mainPage.checkIsMainPageOpened(HEADLINE);
         mainPage.clickIunderstandBtn();
-        mainPage.fillFromField("Amsterdam (Schiphol), Netherlands");
-        mainPage.fillToField("Antalya, Turkey");
-        mainPage.fillDepartOnDateField("20 Aug 2017");
+        mainPage.fillFromField(DESTINATIONFROM);
+        mainPage.fillToField(DESTINATIONTO);
+        mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.uncheckReturnOnCheckbox();
         mainPage.clickSearchFlightButton();
         BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());

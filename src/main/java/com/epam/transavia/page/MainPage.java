@@ -1,10 +1,7 @@
 package com.epam.transavia.page;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -39,6 +36,28 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//input[@id='booking-passengers-input']")
     private WebElement whoWillBeTravellingField;
+
+    @FindBy(xpath = "//div[@class='selectfield adults']/div/div[2]/div/div/button[1]")
+    private WebElement minusAdultlocator;
+
+    @FindBy(xpath = "//div[@class='selectfield adults']/div/div[2]/div/div/div/input")
+    private WebElement textAdultlocator;
+
+    @FindBy(xpath = "//div[@class='selectfield adults']/div/div[2]/div/div/button[2]")
+    private WebElement plusAdultlocator;
+
+    @FindBy(xpath = "//div[@class='selectfield children']/div/div[2]/div/div/button[1]")
+    private WebElement minusChildrenlocator;
+
+    @FindBy(xpath = "//div[@class='selectfield children']/div/div[2]/div/div/div/input")
+    private WebElement textChildrenlocator;
+
+    @FindBy(xpath = "//div[@class='selectfield children']/div/div[2]/div/div/button[2]")
+    private WebElement plusChildrenlocator;
+
+    @FindBy(xpath = "//div[@class='togglepanel']/div[2]/button")
+    private WebElement saveLocator;
+
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -169,5 +188,30 @@ public class MainPage extends BasePage {
             LOG.info(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void addAdultandChildrenToPassengeres(int adult, int children) throws InterruptedException {
+        whoWillBeTravellingField.click();
+        textAdultlocator.sendKeys(Keys.BACK_SPACE);
+        String adultTostring = String.valueOf(adult);
+        textAdultlocator.sendKeys(adultTostring);
+        textChildrenlocator.sendKeys(Keys.BACK_SPACE);
+        String childrenTostring = String.valueOf(children);
+        textChildrenlocator.sendKeys(childrenTostring);
+        saveLocator.click();
+        LOG.info(String.format("adults = %d", adult));
+        LOG.info(String.format("children = %d", children));
+        LOG.info("Add adults and Children to passengers completed");
+    }
+
+    /*
+    id 2
+    */
+    public void addOneAdultandChildren() {
+        whoWillBeTravellingField.click();
+        plusAdultlocator.click();
+        plusChildrenlocator.click();
+        saveLocator.click();
+        LOG.info("Add adults and Children to passengers completed");
     }
 }
