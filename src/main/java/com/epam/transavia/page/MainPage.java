@@ -31,21 +31,14 @@ public class MainPage extends BasePage {
     @FindBy(id = "dateSelection_OutboundDate-datepicker")
     private WebElement departOnDateField;
 
-    @FindBy(id = "dateSelection_IsReturnFlight-datepicker")
-    private WebElement returnOnDateField;
-
     @FindBy(id = "dateSelection_IsReturnFlight")
     private WebElement returnOnCheckbox;
 
-//    @FindBy(xpath = ".//*[@id='desktop']/section/div[2]/div[3]/div/div[2]/div[2]/div[1]/div[1]/div/div/div[2]/div/div/button[2]")
-//    private WebElement buttonAdultsPlus;
-
-    @FindBy(linkText = "Save")
-    private WebElement savePassengerButton;
-
-    @FindBy(linkText = "Search")
+    @FindBy(xpath = "//form[@id='desktop']/section/div[3]/div/button")
     private WebElement searchFlightButton;
 
+    @FindBy(xpath = "//input[@id='booking-passengers-input']")
+    private WebElement whoWillBeTravellingField;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -55,8 +48,8 @@ public class MainPage extends BasePage {
     public void checkIsMainPageOpened(String checkedHeadline) {
         try {
             String headlineOnsite = linkText.getText();
-            LOG.info(String.format("headlineOnsite = %s", headlineOnsite));
-            LOG.info(String.format("checkedHeadline = %s", checkedHeadline));
+            LOG.info(String.format("Headline on site = %s", headlineOnsite));
+            LOG.info(String.format("Checked headline = %s", checkedHeadline));
             Assert.assertEquals(checkedHeadline, headlineOnsite);
             Thread.sleep(5000);
         } catch (Exception e) {
@@ -69,8 +62,9 @@ public class MainPage extends BasePage {
         try {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", iunderstendButton);
+            LOG.info("I understand Button click");
             Thread.sleep(5000);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
         }
@@ -79,7 +73,7 @@ public class MainPage extends BasePage {
     public void fillFromField(String destinationFrom) {
         try {
             WebElement element = null;
-            String s,destinationFromOnsite="";
+            String s, destinationFromOnsite = "";
             fromField.click();
             Thread.sleep(1000);
             List<WebElement> dropdownsFrom = driver.findElements(By.xpath("//ol[@class='results']/descendant::li"));
@@ -87,15 +81,16 @@ public class MainPage extends BasePage {
                 s = dropdownsFrom.get(i).getText();
                 if (destinationFrom.equals(s)) {
                     element = driver.findElement(By.xpath("//ol[@class='results']/li[" + (i + 1) + "]"));
-                    destinationFromOnsite= element.getText();
-                    LOG.info(String.format("destinationFromOnsite = %s", element.getText()));
-                    LOG.info(String.format("destinationFrom = %s", destinationFrom));
+                    destinationFromOnsite = element.getText();
+                    LOG.info(String.format("Destination From on site = %s", element.getText()));
+                    LOG.info(String.format("Destination From checked = %s", destinationFrom));
                 }
             }
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
             Assert.assertEquals(destinationFrom, destinationFromOnsite);
-        } catch (InterruptedException e) {
+            Thread.sleep(1000);
+        } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
         }
@@ -104,31 +99,75 @@ public class MainPage extends BasePage {
     public void fillToField(String destinationTo) {
         try {
             WebElement element = null;
-            String s,destinationToOnsite="";
+            String s, destinationToOnsite = "";
             toField.click();
             Thread.sleep(1000);
-            List<WebElement> dropdownsTo = driver.findElements(By.xpath("//ol[@class='results']/li[2]/ol/descendant::li"));
-            for (int i = 0; i < dropdownsTo.size(); i++) {
-                s = dropdownsTo.get(i).getText();
+
+            //Destinations from Deperture airport
+            List<WebElement> dropdownsToFirthLi = driver.findElements(By.xpath("//ol[@class='results']/li[1]/ol/descendant::li"));
+
+            //Destinations from other airports:
+            List<WebElement> dropdownsToSecondLi = driver.findElements(By.xpath("//ol[@class='results']/li[2]/ol/descendant::li"));
+
+            for (int i = 0; i < dropdownsToFirthLi.size(); i++) {
+                s = dropdownsToFirthLi.get(i).getText();
                 if (destinationTo.equals(s)) {
-                    element = driver.findElement(By.xpath("//ol[@class='results']/li[2]/ol/li[" + (i + 1) + "]"));
-                    destinationToOnsite= element.getText();
+                    element = driver.findElement(By.xpath("//ol[@class='results']/li[1]/ol/li[" + (i + 1) + "]"));
+                    destinationToOnsite = element.getText();
                     LOG.info(String.format("destinationToOnsite = %s", element.getText()));
                     LOG.info(String.format("destinationTo = %s", destinationTo));
+                }
+            }
+
+            for (int i = 0; i < dropdownsToSecondLi.size(); i++) {
+                s = dropdownsToSecondLi.get(i).getText();
+                if (destinationTo.equals(s)) {
+                    element = driver.findElement(By.xpath("//ol[@class='results']/li[2]/ol/li[" + (i + 1) + "]"));
+                    destinationToOnsite = element.getText();
+                    LOG.info(String.format("Destination To on site = %s", element.getText()));
+                    LOG.info(String.format("Destination To checked = %s", destinationTo));
                 }
             }
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
             Assert.assertEquals(destinationTo, destinationToOnsite);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    //6 Aug 2017
-    public void fillDepartOnDateField(String departDate){
+    public void fillDepartOnDateField(String departDate) {
+        departOnDateField.click();
+        departOnDateField.clear();
         departOnDateField.sendKeys(departDate);
+        LOG.info(String.format("Depart date = %s", departDate));
     }
 
+    public void uncheckReturnOnCheckbox() {
+        try {
+            if (returnOnCheckbox.isSelected()) {
+                JavascriptExecutor executor = (JavascriptExecutor) driver;
+                executor.executeScript("arguments[0].click();", returnOnCheckbox);
+                LOG.info("Checkbox successfully unchecked");
+                Thread.sleep(3000);
+            } else {
+                LOG.info("By now, checkbox was unchecked");
+            }
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void clickSearchFlightButton() {
+        try {
+            searchFlightButton.click();
+            LOG.info("Search flight button click");
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }
