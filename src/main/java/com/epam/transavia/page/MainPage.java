@@ -105,9 +105,9 @@ public class MainPage extends BasePage {
                     LOG.info(String.format("Destination From checked = %s", destinationFrom));
                 }
             }
+            Assert.assertEquals(destinationFrom, destinationFromOnsite);
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
-            Assert.assertEquals(destinationFrom, destinationFromOnsite);
             Thread.sleep(1000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
@@ -147,9 +147,9 @@ public class MainPage extends BasePage {
                     LOG.info(String.format("Destination To checked = %s", destinationTo));
                 }
             }
+            Assert.assertEquals(destinationTo, destinationToOnsite);
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
-            Assert.assertEquals(destinationTo, destinationToOnsite);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -204,10 +204,7 @@ public class MainPage extends BasePage {
         LOG.info("Add adults and Children to passengers completed");
     }
 
-    /*
-    id 2
-    */
-    public void addOneAdultandChildren() {
+    public void addOneAdultandOneChild() {
         whoWillBeTravellingField.click();
         plusAdultlocator.click();
         plusChildrenlocator.click();
