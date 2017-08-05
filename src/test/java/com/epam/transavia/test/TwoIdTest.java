@@ -22,25 +22,20 @@ public class TwoIdTest extends BaseTest {
         mainPage.clickIunderstandBtn();
         mainPage.fillFromField(DESTINATIONFROM);
         mainPage.fillToField(DESTINATIONTO);
-
         mainPage.fillDepartOnDateField(DEPARTDATE);
+        mainPage.fillReturOnDateField(RETURNDATE);
         mainPage.addOneAdultandOneChild();
         mainPage.clickSearchFlightButton();
         BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());
         bookAFlightPage.isFlightPresent();
-
         bookAFlightPage.findTitleInboundFlight();
         bookAFlightPage.findTitleOutboundFlight();
-
         bookAFlightPage.selectOutboundFlight();
         bookAFlightPage.selectInboundFlight();
-
         bookAFlightPage.clickBtnNext();
         ChooseAFarePage chooseAFarePage = new ChooseAFarePage(getDriver());
         chooseAFarePage.clickPlusTitle();
-        chooseAFarePage.clickBtnSelectInPlusTab();
-        chooseAFarePage.checkCorrectCulculations();
-
-        //getDriver().close();
+        chooseAFarePage.checkCorrectCalculations();
+      //getDriver().close();
     }
 }

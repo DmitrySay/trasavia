@@ -6,8 +6,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
 import java.util.List;
-import static org.testng.Assert.*;
+
+import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 
 public class BookAFlightPage extends BasePage {
@@ -24,11 +28,12 @@ public class BookAFlightPage extends BasePage {
     private static final By outboundFlightSelectBtn = By.xpath("//section[@class='flight outbound']/div/div[1]/div[2]/div/div[3]/div/form/div/button");
     private static final By inboundFlightSelectBtn = By.xpath("//section[@class='flight inbound']/div/div[1]/div[2]/div/div[3]/div/form/div/button");
 
-    @FindBy(xpath = "//div[@id='top']/form/div[1]/div/footer/div/div/section/div/button")
+    @FindBy(name = "next_button")
     private WebElement nextBtn;
 
     public BookAFlightPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
     public void isFlightPresent() {
@@ -65,13 +70,15 @@ public class BookAFlightPage extends BasePage {
                     break;
                 }
             }
-            if(fromElement==null){fail("Flight is not found");}
+            if (fromElement == null) {
+                fail("Flight is not found");
+            }
             fromElement.click();
             LOG.info("Choose firth outbound flight");
-            Thread.sleep(2000);
+            Thread.sleep(3000);
             driver.findElement(outboundFlightSelectBtn).click();
             LOG.info("Click select outbound flight button");
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -86,15 +93,18 @@ public class BookAFlightPage extends BasePage {
                 WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
                 if (el.getAttribute("class").equals("price")) {
                     toElement = driver.findElement(By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
-                    break;
+                    // break;
                 }
             }
-            if(toElement==null){fail("Flight is not found");}
-            LOG.info("Choose firth inbound flight");
-            Thread.sleep(2000);
+            if (toElement == null) {
+                fail("Flight is not found");
+            }
+            toElement.click();
+            LOG.info("Choose  inbound flight");
+            Thread.sleep(3000);
             driver.findElement(inboundFlightSelectBtn).click();
             LOG.info("Click select inbound flight button");
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -103,7 +113,7 @@ public class BookAFlightPage extends BasePage {
 
     public void clickBtnNext() {
         try {
-            nextBtn.submit();
+            nextBtn.click();
             LOG.info("Click 'NEXT' button");
             Thread.sleep(5000);
         } catch (Exception e) {

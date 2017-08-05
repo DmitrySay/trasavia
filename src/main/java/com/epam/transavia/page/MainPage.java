@@ -28,6 +28,9 @@ public class MainPage extends BasePage {
     @FindBy(id = "dateSelection_OutboundDate-datepicker")
     private WebElement departOnDateField;
 
+    @FindBy(id = "dateSelection_IsReturnFlight-datepicker")
+    private WebElement returnOnDateField;
+
     @FindBy(id = "dateSelection_IsReturnFlight")
     private WebElement returnOnCheckbox;
 
@@ -82,7 +85,7 @@ public class MainPage extends BasePage {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", iunderstendButton);
             LOG.info("I understand Button click");
-            Thread.sleep(5000);
+            Thread.sleep(3000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -163,6 +166,13 @@ public class MainPage extends BasePage {
         LOG.info(String.format("Depart date = %s", departDate));
     }
 
+    public void fillReturOnDateField(String returnDate) {
+        returnOnDateField.click();
+        returnOnDateField.clear();
+        returnOnDateField.sendKeys(returnDate);
+        LOG.info(String.format("Return date = %s", returnDate));
+    }
+
     public void uncheckReturnOnCheckbox() {
         try {
             if (returnOnCheckbox.isSelected()) {
@@ -183,7 +193,7 @@ public class MainPage extends BasePage {
         try {
             searchFlightButton.click();
             LOG.info("Search flight button click");
-            Thread.sleep(5000);
+            Thread.sleep(7000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -205,10 +215,15 @@ public class MainPage extends BasePage {
     }
 
     public void addOneAdultandOneChild() {
-        whoWillBeTravellingField.click();
-        plusAdultlocator.click();
-        plusChildrenlocator.click();
-        saveLocator.click();
-        LOG.info("Add adults and Children to passengers completed");
+        try {
+            whoWillBeTravellingField.click();
+            plusAdultlocator.click();
+            plusChildrenlocator.click();
+            saveLocator.click();
+            LOG.info("Add adults and Child to passengers completed");
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
