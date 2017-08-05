@@ -38,6 +38,7 @@ public class BookAFlightPage extends BasePage {
 
     public void isFlightPresent() {
         assertTrue(isElementPresent(locator));
+        LOG.info("A Flight is Displayed");
     }
 
     private boolean isElementPresent(By by) {

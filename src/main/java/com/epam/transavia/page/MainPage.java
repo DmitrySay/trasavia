@@ -160,17 +160,35 @@ public class MainPage extends BasePage {
     }
 
     public void fillDepartOnDateField(String departDate) {
-        departOnDateField.click();
-        departOnDateField.clear();
-        departOnDateField.sendKeys(departDate);
-        LOG.info(String.format("Depart date = %s", departDate));
+        try {
+            departOnDateField.click();
+            departOnDateField.clear();
+            departOnDateField.sendKeys(departDate);
+            Thread.sleep(1000);
+            String departOnDateOnsite = departOnDateField.getAttribute("value");
+            LOG.info(String.format("Depart date is = %s", departDate));
+            LOG.info(String.format("Depart date on site is = %s", departOnDateOnsite));
+            Assert.assertEquals(departDate, departOnDateOnsite);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void fillReturOnDateField(String returnDate) {
-        returnOnDateField.click();
-        returnOnDateField.clear();
-        returnOnDateField.sendKeys(returnDate);
-        LOG.info(String.format("Return date = %s", returnDate));
+        try {
+            returnOnDateField.click();
+            returnOnDateField.clear();
+            returnOnDateField.sendKeys(returnDate);
+            Thread.sleep(1000);
+            String returnDateOnsite = returnOnDateField.getAttribute("value");
+            LOG.info(String.format("Return date = %s", returnDate));
+            LOG.info(String.format("Return date on site = %s", returnDate));
+            Assert.assertEquals(returnDate, returnDateOnsite);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void uncheckReturnOnCheckbox() {
@@ -220,7 +238,7 @@ public class MainPage extends BasePage {
             plusAdultlocator.click();
             plusChildrenlocator.click();
             saveLocator.click();
-            LOG.info("Add adults and Child to passengers completed");
+            LOG.info("Add One extra adult and One Child to passengers completed");
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
