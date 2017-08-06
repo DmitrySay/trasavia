@@ -40,6 +40,9 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//input[@id='booking-passengers-input']")
     private WebElement whoWillBeTravellingField;
 
+    @FindBy(xpath = "//input[@id='booking-passengers-input']/../div")
+    private WebElement quantityOfPassengers;
+
     @FindBy(xpath = "//div[@class='selectfield adults']/div/div[2]/div/div/button[1]")
     private WebElement minusAdultlocator;
 
@@ -191,6 +194,14 @@ public class MainPage extends BasePage {
         }
     }
 
+    public void checkReturnOnDateFieldIsEmpty() {
+        returnOnDateField.click();
+        String returnDateOnsite = returnOnDateField.getAttribute("placeholder");
+        LOG.info(String.format("Return date on site = %s", returnDateOnsite));
+        Assert.assertEquals(returnDateOnsite, "Single flight");
+        LOG.info("Return date on site = Single flight is checked");
+    }
+
     public void uncheckReturnOnCheckbox() {
         try {
             if (returnOnCheckbox.isSelected()) {
@@ -218,7 +229,7 @@ public class MainPage extends BasePage {
         }
     }
 
-    public void addAdultandChildrenToPassengeres(int adult, int children) throws InterruptedException {
+    public void addAdultsAndChildrenToPassengeres(int adult, int children) {
         whoWillBeTravellingField.click();
         textAdultlocator.sendKeys(Keys.BACK_SPACE);
         String adultTostring = String.valueOf(adult);
@@ -233,15 +244,16 @@ public class MainPage extends BasePage {
     }
 
     public void addOneAdultandOneChild() {
-        try {
-            whoWillBeTravellingField.click();
-            plusAdultlocator.click();
-            plusChildrenlocator.click();
-            saveLocator.click();
-            LOG.info("Add One extra adult and One Child to passengers completed");
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        whoWillBeTravellingField.click();
+        plusAdultlocator.click();
+        plusChildrenlocator.click();
+        saveLocator.click();
+        LOG.info("Add One extra adult and One Child to passengers completed");
+    }
+
+    public void checkOneAdultInPassengers() {
+        String passengers = quantityOfPassengers.getAttribute("innerHTML");
+        Assert.assertEquals(passengers, "1 Adult");
+        LOG.info("1 Adult in passengers is checked");
     }
 }

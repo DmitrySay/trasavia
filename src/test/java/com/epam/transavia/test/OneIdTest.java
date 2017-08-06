@@ -23,6 +23,8 @@ public class OneIdTest extends BaseTest {
         mainPage.fillToField(DESTINATIONTO);
         mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.uncheckReturnOnCheckbox();
+        mainPage.checkReturnOnDateFieldIsEmpty();
+        mainPage.checkOneAdultInPassengers();
         mainPage.clickSearchFlightButton();
         BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());
         bookAFlightPage.isFlightPresent();
