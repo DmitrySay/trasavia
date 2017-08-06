@@ -64,6 +64,20 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[@class='togglepanel']/div[2]/button")
     private WebElement saveLocator;
 
+    @FindBy(xpath = "html/body/header/nav/div[1]/div[1]/ul/li[3]/a")
+    private WebElement manageYourBookingLocator;
+
+    @FindBy(xpath = "//div[@id='horizontal-sub-navigation-manageyourbooking']/div/div[2]/div/div[1]/div/ul/li[2]/a/div/span[2]")
+    private WebElement viewYourBookingLocator;
+
+
+    public void clickManageAndThenViewYourBooking(){
+        manageYourBookingLocator.click();
+        LOG.info(" Manage your booking click");
+        viewYourBookingLocator.click();
+        LOG.info(" View your booking click");
+    }
+
 
     public MainPage(WebDriver driver) {
         super(driver);

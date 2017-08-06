@@ -16,7 +16,7 @@ public class TwoIdTest extends BaseTest {
 
 
     @Test
-    public void runTwoIdTest() throws InterruptedException {
+    public void runTwoIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened(HEADLINE);
         mainPage.clickIunderstandBtn();
