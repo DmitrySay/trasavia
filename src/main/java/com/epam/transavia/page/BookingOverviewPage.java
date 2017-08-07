@@ -19,14 +19,22 @@ public class BookingOverviewPage extends BasePage {
     @FindBy(xpath = "//div[@id='top']/div[1]/div/div[1]/div[2]/div[1]/div/div/div[1]/h3/span[3]")
     private WebElement destinationToLocator;
 
+    @FindBy(xpath = "//a[@href='/en-EU/my-transavia/booking/booking-details/']")
+    private WebElement bookingDetailsLocator;
+
+    @FindBy(xpath = "//div[@class='amount']")
+    private WebElement paymentAmountLocator;
+
+    @FindBy(xpath = "//div[@class='front']")
+    private WebElement totalPriceLocator;
+
     public BookingOverviewPage(WebDriver driver) {
         super(driver);
-
         PageFactory.initElements(driver, this);
     }
 
     public String getBookingOverviewPageTitle() {
-        String title="";
+        String title = "";
         try {
             Thread.sleep(5000);
             title = driver.getTitle();
@@ -52,6 +60,27 @@ public class BookingOverviewPage extends BasePage {
     public String getDestinationTo() {
         LOG.info(String.format("Destination to on site is = %s", destinationToLocator.getText()));
         return destinationToLocator.getText();
+    }
+
+    public void clickBookingDetails() {
+        try {
+            bookingDetailsLocator.click();
+            LOG.info("Booking details link click");
+            Thread.sleep(3000);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public String getTotalprice() {
+        LOG.info(String.format("Total price on site is = %s",  totalPriceLocator.getText()));
+        return totalPriceLocator.getText();
+    }
+
+    public String getPaymentAmount() {
+        LOG.info(String.format("Payment amount on site is = %s",  paymentAmountLocator.getText()));
+        return paymentAmountLocator.getText();
     }
 
 

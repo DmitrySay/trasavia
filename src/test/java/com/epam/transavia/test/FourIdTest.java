@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
-public class ThreeIdTest extends BaseTest {
+public class FourIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(TwoIdTest.class);
     private static final String HEADLINE = "Where do you want to go?";
     private static final String BOOKINGNUMBER = "MF8C9R";
@@ -20,24 +20,18 @@ public class ThreeIdTest extends BaseTest {
     private static final String BOOKINGOVERVIEWTITLE = "View your booking";
 
     @Test
-    public void runThreeIdTest() {
+    public void runFourIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened(HEADLINE);
         mainPage.clickIunderstandBtn();
         mainPage.clickManageAndThenViewYourBooking();
         LoginPage loginPage = new LoginPage(getDriver());
-        String expectedTitle = LOGINTITLE;
-        LOG.info(String.format("Expected title  = %s", expectedTitle));
-        String actualTitle = loginPage.getloginPageTitle();
-        LOG.info(String.format("Actual title  = %s", actualTitle));
-        assertEquals(expectedTitle, actualTitle);
         loginPage.doLogin(BOOKINGNUMBER, LASTNAME, FLIGHTDATE);
 
         BookingOverviewPage bookingOverviewPage = new BookingOverviewPage(getDriver());
         assertEquals(BOOKINGOVERVIEWTITLE, bookingOverviewPage.getBookingOverviewPageTitle());
-        assertEquals(BOOKINGNUMBER, bookingOverviewPage.getBookingNumber());
-        assertEquals(DESTINATIONFROM, bookingOverviewPage.getDestinationFrom());
-        assertEquals(DESTINATIONTO, bookingOverviewPage.getDestinationTo());
+        bookingOverviewPage.clickBookingDetails();
+        assertEquals(bookingOverviewPage.getTotalprice(), bookingOverviewPage.getPaymentAmount());
         //getDriver().close();
     }
 }
