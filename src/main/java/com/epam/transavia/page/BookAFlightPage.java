@@ -19,7 +19,7 @@ public class BookAFlightPage extends BasePage {
     private static final By locator = By.xpath("//span[@class='price']");
     private static final By outboundFlightTitleLocator = By.xpath("//h2[contains(text(),'Outbound flight')]/text()");
     private static final By inboundFlightTitleLocator = By.xpath("//h2[contains(text(),'Inbound flight')]/text()");
-
+    private static final String textError = "Unfortunately we do not fly from Dubai, United Arab Emirates to Agadir, Morocco. However, we do fly from Dubai, United Arab Emirates to other destinations. Please change your destination and try again.";
     //выбор рейса
     private static final By outboundFlightLocator = By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/descendant::li");
     private static final By inboundFlightLocator = By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/descendant::li");
@@ -31,9 +31,19 @@ public class BookAFlightPage extends BasePage {
     @FindBy(name = "next_button")
     private WebElement nextBtn;
 
+    @FindBy(xpath = "//form[@id='flights']/div/section/div[2]/div[1]/div/div/div[1]/div/div/div[2]/p")
+    private WebElement errorMessageLocator;
+
     public BookAFlightPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public Boolean getMessage() {
+        String textErrorOnSite = errorMessageLocator.getText();
+        LOG.info(String.format("Error message = %s", textError));
+        LOG.info(String.format("Error message on site = %s", textErrorOnSite));
+        return (textError.equals(textErrorOnSite));
     }
 
     public void isFlightPresent() {

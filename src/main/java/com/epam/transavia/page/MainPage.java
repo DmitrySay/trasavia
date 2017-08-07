@@ -236,7 +236,7 @@ public class MainPage extends BasePage {
         try {
             searchFlightButton.click();
             LOG.info("Search flight button click");
-            Thread.sleep(7000);
+            Thread.sleep(5000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
