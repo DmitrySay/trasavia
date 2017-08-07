@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class ThreeIdTest extends BaseTest {
-    private static final Logger LOG = Logger.getLogger(TwoIdTest.class);
+    private static final Logger LOG = Logger.getLogger(ThreeIdTest.class);
     private static final String HEADLINE = "Where do you want to go?";
     private static final String BOOKINGNUMBER = "MF8C9R";
     private static final String LASTNAME = "kukharau";

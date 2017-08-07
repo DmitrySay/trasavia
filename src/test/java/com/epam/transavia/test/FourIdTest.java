@@ -9,14 +9,11 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class FourIdTest extends BaseTest {
-    private static final Logger LOG = Logger.getLogger(TwoIdTest.class);
+    private static final Logger LOG = Logger.getLogger(FourIdTest.class);
     private static final String HEADLINE = "Where do you want to go?";
     private static final String BOOKINGNUMBER = "MF8C9R";
     private static final String LASTNAME = "kukharau";
     private static final String FLIGHTDATE = "9 June 2016";
-    private static final String DESTINATIONFROM = "Pisa";
-    private static final String DESTINATIONTO = "Amsterdam (Schiphol)";
-    private static final String LOGINTITLE = "Log in";
     private static final String BOOKINGOVERVIEWTITLE = "View your booking";
 
     @Test
