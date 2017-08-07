@@ -70,8 +70,11 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[@id='horizontal-sub-navigation-manageyourbooking']/div/div[2]/div/div[1]/div/ul/li[2]/a/div/span[2]")
     private WebElement viewYourBookingLocator;
 
+    @FindBy(xpath = "//form[@id='desktop']/section/div[3]/ul/li[2]/a")
+    private WebElement addMultipleDestinationsLocator;
 
-    public void clickManageAndThenViewYourBooking(){
+
+    public void clickManageAndThenViewYourBooking() {
         manageYourBookingLocator.click();
         LOG.info(" Manage your booking click");
         viewYourBookingLocator.click();
@@ -269,5 +272,18 @@ public class MainPage extends BasePage {
         String passengers = quantityOfPassengers.getAttribute("innerHTML");
         Assert.assertEquals(passengers, "1 Adult");
         LOG.info("1 Adult in passengers is checked");
+    }
+
+    public BookAFlightPage clickAddMultipleDestinationsLink() {
+        try {
+            addMultipleDestinationsLocator.click();
+            LOG.info("Click Add multiple destinations link");
+            Thread.sleep(5000);
+            return new BookAFlightPage(driver);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 }

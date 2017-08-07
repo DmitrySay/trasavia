@@ -31,8 +31,106 @@ public class BookAFlightPage extends BasePage {
     @FindBy(name = "next_button")
     private WebElement nextBtn;
 
+    @FindBy(xpath = "html/body/header/nav/div[1]/h1")
+    private WebElement bookAflightLocator;
+
     @FindBy(xpath = "//form[@id='flights']/div/section/div[2]/div[1]/div/div/div[1]/div/div/div[2]/p")
     private WebElement errorMessageLocator;
+
+    @FindBy(id = "openJawRouteSelection_DepartureStationOutbound-input")
+    private WebElement outFromField;
+
+    @FindBy(xpath = "//input[@id='openJawRouteSelection_DepartureStationOutbound-input']/../../../div[2]/span[1]")
+    private WebElement textOutFromField;
+
+    @FindBy(id = "openJawRouteSelection_ArrivalStationOutbound-input")
+    private WebElement outToField;
+
+    @FindBy(xpath = "//input[@id='openJawRouteSelection_ArrivalStationOutbound-input']/../../../div[2]/span[1]")
+    private WebElement textOutToField;
+
+    @FindBy(id = "openJawRouteSelection_DepartureStationInbound-input")
+    private WebElement inFromField;
+
+    @FindBy(xpath = "//input[@id='openJawRouteSelection_DepartureStationInbound-input']/../../../div[2]/span[1]")
+    private WebElement textInFromField;
+
+    @FindBy(id = "openJawRouteSelection_ArrivalStationInbound-input")
+    private WebElement inToField;
+
+    @FindBy(xpath = "//input[@id='openJawRouteSelection_ArrivalStationInbound-input']/../../../div[2]/span[1]")
+    private WebElement textInToField;
+
+    @FindBy(id = "dateSelection_OutboundDate-datepicker")
+    private WebElement outDateField;
+
+    @FindBy(id = "dateSelection_InboundDate-datepicker")
+    private WebElement inDateField;
+
+    @FindBy(xpath = "//form[@id='flights']/div/section/div[3]/div/button[2]")
+    private WebElement searchButton;
+
+    public String fillToOutboundField(String outDestinationTo) {
+        outToField.click();
+        outToField.sendKeys(outDestinationTo);
+        bookAflightLocator.click();
+        String text = outToField.getAttribute("value");
+        LOG.info(String.format("Outbound Destination To on site = %s", text));
+        LOG.info(String.format("Outbound Destination To checked = %s", outDestinationTo));
+        return text;
+    }
+
+    public String fillFromOutboundField(String outDestinationFrom) {
+        outFromField.click();
+        outFromField.sendKeys(outDestinationFrom);
+        bookAflightLocator.click();
+        String text = outFromField.getAttribute("value");
+        LOG.info(String.format("Outbound Destination From on site = %s", text));
+        LOG.info(String.format("Outbound Destination From checked = %s", outDestinationFrom));
+        return text;
+    }
+
+    public String fillToInboundField(String inDestinationTo) {
+        inToField.click();
+        inToField.sendKeys(inDestinationTo);
+        bookAflightLocator.click();
+        String text = inToField.getAttribute("value");
+        LOG.info(String.format("Inbound Destination To on site = %s", text));
+        LOG.info(String.format("Inbound Destination To checked = %s", inDestinationTo));
+        return text;
+    }
+
+    public String fillFromInboundField(String inDestinationFrom) {
+        inFromField.click();
+        inFromField.sendKeys(inDestinationFrom);
+        bookAflightLocator.click();
+        String text = inFromField.getAttribute("value");
+        LOG.info(String.format("Inbound Destination From on site = %s", text));
+        LOG.info(String.format("Inbound Destination From checked = %s", inDestinationFrom));
+        return text;
+    }
+
+    public String fillOutDateField(String outdepartDate) {
+        outDateField.click();
+        outDateField.clear();
+        outDateField.sendKeys(outdepartDate);
+        bookAflightLocator.click();
+        String text = outDateField.getAttribute("value");
+        LOG.info(String.format("Outbound flight date = %s", outdepartDate));
+        LOG.info(String.format("Outbound flight date on site = %s", text));
+        return text;
+    }
+
+    public String fillInDateField(String indepartDate) {
+        inDateField.click();
+        inDateField.clear();
+        inDateField.sendKeys(indepartDate);
+        bookAflightLocator.click();
+        String text = inDateField.getAttribute("value");
+        LOG.info(String.format("Inbound flight date = %s", indepartDate));
+        LOG.info(String.format("Inbound flight date on site = %s", text));
+        return text;
+    }
 
     public BookAFlightPage(WebDriver driver) {
         super(driver);
@@ -70,6 +168,31 @@ public class BookAFlightPage extends BasePage {
         LOG.info("Title Inbound Flight is Displayed");
     }
 
+    public void clickSelectOutboundFlight() {
+        try {
+            driver.findElement(outboundFlightSelectBtn).submit();
+            LOG.info("Click select outbound flight button");
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void clickSelectInboundFlight() {
+        try {
+            driver.findElement(inboundFlightSelectBtn).submit();
+            LOG.info("Click select inbound flight button");
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    METHOD GETS ONE FIRST FLIGHT FROM 7 DAYS OUTBOUND FLIGHTS
+     */
     public void selectOutboundFlight() {
         try {
             WebElement fromElement = null;
@@ -126,6 +249,17 @@ public class BookAFlightPage extends BasePage {
         try {
             nextBtn.click();
             LOG.info("Click 'NEXT' button");
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void clickSearchBtn() {
+        try {
+            searchButton.click();
+            LOG.info("Click 'SEARCH' button");
             Thread.sleep(5000);
         } catch (Exception e) {
             LOG.info(e.getMessage());

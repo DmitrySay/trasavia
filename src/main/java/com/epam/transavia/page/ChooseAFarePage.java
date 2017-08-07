@@ -25,11 +25,23 @@ public class ChooseAFarePage extends BasePage {
     @FindBy(xpath = "//footer/div/div/section/div/div/div[2]/div/div/div[2]")
     private WebElement totalCostBeforeDot;
 
+    @FindBy(xpath = "//footer/div/div/section/div/div/div[2]/div/div/div[1]")
+    private WebElement totalCostBeforeDotBasic;
+
     @FindBy(xpath = "//footer/div/div/section/div/div/div[2]/div/div/div[2]/span")
     private WebElement totalCostAfterDot;
 
     @FindBy(xpath = "//p[@class='price']")
     private WebElement totalCostlocator;
+
+    @FindBy(xpath = "//footer/div/div/a/section/p/span")
+    private WebElement detailsLinklocator;
+
+    @FindBy(xpath = "//aside/div/div[2]/p[1]")
+    private WebElement outboundPricelocator;
+
+    @FindBy(xpath = "//aside/div/div[5]/p[1]")
+    private WebElement inboundPricelocator;
 
     public ChooseAFarePage(WebDriver driver) {
         super(driver);
@@ -65,7 +77,7 @@ public class ChooseAFarePage extends BasePage {
     private double getPricefromElement(WebElement element) {
         String s = element.getText();
         LOG.info(String.format("String with price on site = %s", s));
-        String[] s2;
+        String[] s2 = {" ", " "};
         s2 = s.split("\\D+");
         LOG.info(String.format("String after split = %s", s2[1]));
         double quantity = 0;
@@ -93,5 +105,39 @@ public class ChooseAFarePage extends BasePage {
         double totalPrice = getPricefromElement(totalCostlocator);
         LOG.info(String.format("Total price after click 'select' button = %.2f", totalPrice));
         Assert.assertEquals(totalPrice, calculate);
+    }
+
+    /*
+    Method gets total price
+     */
+    public double getTotalPrice() {
+        try {
+            Thread.sleep(3000);
+            double totalCostBefore = getPricefromElement(totalCostBeforeDotBasic);
+            LOG.info(String.format("Total price on site = %.2f", totalCostBefore));
+            return totalCostBefore;
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return 0.0d;
+    }
+
+    public double getDetailPrice() {
+        try {
+            detailsLinklocator.click();
+            Thread.sleep(3000);
+            double outboundPrice = getPricefromElement(outboundPricelocator);
+            LOG.info(String.format("Outbound flight price on site = %.2f", outboundPrice));
+            double intboundPrice = getPricefromElement(inboundPricelocator);
+            LOG.info(String.format("Inbound flight price on site = %.2f", intboundPrice));
+            double total = outboundPrice + intboundPrice;
+            LOG.info(String.format("Total price on site in detail tab = %.2f", total));
+            return total;
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return 0.0d;
     }
 }
