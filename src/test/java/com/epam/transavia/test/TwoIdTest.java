@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class TwoIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(TwoIdTest.class);
-    private static final String HEADLINE = "Where do you want to go?";
     private static final String DESTINATIONFROM = "Dublin, Ireland";
     private static final String DESTINATIONTO = "Paris (Orly South), France";
     private static final String DEPARTDATE = "31 Aug 2017";
@@ -18,7 +17,7 @@ public class TwoIdTest extends BaseTest {
     @Test
     public void runTwoIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
+        mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         mainPage.fillFromField(DESTINATIONFROM);
         mainPage.fillToField(DESTINATIONTO);

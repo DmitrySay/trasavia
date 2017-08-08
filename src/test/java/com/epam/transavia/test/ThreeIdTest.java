@@ -10,7 +10,6 @@ import static org.testng.Assert.assertEquals;
 
 public class ThreeIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(ThreeIdTest.class);
-    private static final String HEADLINE = "Where do you want to go?";
     private static final String BOOKINGNUMBER = "MF8C9R";
     private static final String LASTNAME = "kukharau";
     private static final String FLIGHTDATE = "9 June 2016";
@@ -22,7 +21,6 @@ public class ThreeIdTest extends BaseTest {
     @Test
     public void runThreeIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
         mainPage.clickIunderstandBtn();
         mainPage.clickManageAndThenViewYourBooking();
         LoginPage loginPage = new LoginPage(getDriver());

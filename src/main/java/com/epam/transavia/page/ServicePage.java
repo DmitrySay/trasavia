@@ -51,7 +51,6 @@ public class ServicePage extends BasePage {
             String originalWindow = driver.getWindowHandle();
             final Set<String> oldWindowsSet = driver.getWindowHandles();
 
-            //переход по ссылке, если есть заданное выражение
             driver.switchTo().frame(iframeLocator);
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", videoNameLocator);

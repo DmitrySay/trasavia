@@ -9,14 +9,13 @@ import org.testng.annotations.Test;
 
 public class SixIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(SixIdTest.class);
-    private static final String HEADLINE = "Where do you want to go?";
     private static final String AUTHOR = "Transavia";
     private static final String LINK = "https://www.youtube.com/watch?v=fQMuhniqWAg";
 
     @Test
     public void runSixIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
+        mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         mainPage.clickServiceAndThenHandLuggage();
         ServicePage servicePage = new ServicePage(getDriver());

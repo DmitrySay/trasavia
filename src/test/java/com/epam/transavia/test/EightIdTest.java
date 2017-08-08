@@ -9,14 +9,13 @@ import static org.testng.Assert.assertTrue;
 
 public class EightIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(OneIdTest.class);
-    private static final String HEADLINE ="Where do you want to go?";
     private static final String DESTINATIONFROM ="Dubai, United Arab Emirates";
     private static final String DESTINATIONTO ="Agadir, Morocco";
 
     @Test
     public void runEightIdTest(){
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
+        mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         mainPage.fillFromField(DESTINATIONFROM);
         mainPage.fillToField(DESTINATIONTO);

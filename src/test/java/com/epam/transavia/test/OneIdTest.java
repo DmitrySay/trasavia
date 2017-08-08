@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class OneIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(OneIdTest.class);
-    private static final String HEADLINE ="Where do you want to go?";
     private static final String DESTINATIONFROM ="Amsterdam (Schiphol), Netherlands";
     private static final String DESTINATIONTO ="Antalya, Turkey";
     private static final String DEPARTDATE ="20 Aug 2017";
@@ -17,7 +16,7 @@ public class OneIdTest extends BaseTest {
     @Test
     public void runOneIdTest(){
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
+        mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         mainPage.fillFromField(DESTINATIONFROM);
         mainPage.fillToField(DESTINATIONTO);

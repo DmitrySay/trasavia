@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MainPage extends BasePage {
     public static final String URL = "https://www.transavia.com/en-EU/home/";
+    private static final String HEADLINE ="Where do you want to go?";
     private static final Logger LOG = Logger.getLogger(MainPage.class);
 
     @FindBy(xpath = "//form[@id='desktop']/section/div[1]/h1")
@@ -100,10 +101,11 @@ public class MainPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void checkIsMainPageOpened(String checkedHeadline) {
+    public void checkIsMainPageOpened() {
         try {
             String headlineOnsite = linkText.getText();
             LOG.info(String.format("Headline on site = %s", headlineOnsite));
+            String checkedHeadline =HEADLINE;
             LOG.info(String.format("Checked headline = %s", checkedHeadline));
             Assert.assertEquals(checkedHeadline, headlineOnsite);
             Thread.sleep(5000);

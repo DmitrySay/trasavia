@@ -10,7 +10,6 @@ import static org.testng.Assert.assertEquals;
 
 public class NineIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(OneIdTest.class);
-    private static final String HEADLINE = "Where do you want to go?";
     //Outbound flight
     private static final String OUTDESTINATIONFROM = "Bologna, Italy";
     private static final String OUTDESTINATIONTO = "Eindhoven, Netherlands";
@@ -24,7 +23,7 @@ public class NineIdTest extends BaseTest {
     @Test
     public void runNineIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
+        mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         BookAFlightPage bookAFlightPage = mainPage.clickAddMultipleDestinationsLink();
         String outdestinationFrom = bookAFlightPage.fillFromOutboundField(OUTDESTINATIONFROM);

@@ -10,7 +10,6 @@ import static org.testng.Assert.assertEquals;
 
 public class FourIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(FourIdTest.class);
-    private static final String HEADLINE = "Where do you want to go?";
     private static final String BOOKINGNUMBER = "MF8C9R";
     private static final String LASTNAME = "kukharau";
     private static final String FLIGHTDATE = "9 June 2016";
@@ -19,7 +18,7 @@ public class FourIdTest extends BaseTest {
     @Test
     public void runFourIdTest() {
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.checkIsMainPageOpened(HEADLINE);
+        mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         mainPage.clickManageAndThenViewYourBooking();
         LoginPage loginPage = new LoginPage(getDriver());
