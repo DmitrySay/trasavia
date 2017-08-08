@@ -67,6 +67,12 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "html/body/header/nav/div[1]/div[1]/ul/li[3]/a")
     private WebElement manageYourBookingLocator;
 
+    @FindBy(xpath = "html/body/header/nav/div[1]/div[1]/ul/li[4]/a")
+    private WebElement serviceLocator;
+
+    @FindBy(xpath = "//div[@id='horizontal-sub-navigation-service']/div/div[2]/div/div[2]/div[2]/ul/li[1]/a")
+    private WebElement handluggageLocator;
+
     @FindBy(xpath = "//div[@id='horizontal-sub-navigation-manageyourbooking']/div/div[2]/div/div[1]/div/ul/li[2]/a/div/span[2]")
     private WebElement viewYourBookingLocator;
 
@@ -79,6 +85,13 @@ public class MainPage extends BasePage {
         LOG.info(" Manage your booking click");
         viewYourBookingLocator.click();
         LOG.info(" View your booking click");
+    }
+
+    public void clickServiceAndThenHandLuggage(){
+        serviceLocator.click();
+        LOG.info(" Service link click");
+        handluggageLocator.click();
+        LOG.info(" Hand luggage link click");
     }
 
 
@@ -268,6 +281,9 @@ public class MainPage extends BasePage {
         LOG.info("Add One extra adult and One Child to passengers completed");
     }
 
+    /*
+    METHOD GETS TEXT FROM whoWillBeTravellingField AND CHECK IS TEXT == PASSENGERS
+     */
     public void checkOneAdultInPassengers() {
         String passengers = quantityOfPassengers.getAttribute("innerHTML");
         Assert.assertEquals(passengers, "1 Adult");

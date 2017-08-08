@@ -144,6 +144,9 @@ public class BookAFlightPage extends BasePage {
         return (textError.equals(textErrorOnSite));
     }
 
+    /*
+    METHOD CHECK IS ONE FLIGHT DISPLAYED WITH 'FROM' AND 'PRICE'
+    */
     public void isFlightPresent() {
         assertTrue(isElementPresent(locator));
         LOG.info("A Flight is Displayed");
@@ -168,6 +171,9 @@ public class BookAFlightPage extends BasePage {
         LOG.info("Title Inbound Flight is Displayed");
     }
 
+    /*
+     METHOD SELECT ONE DEFAULT (BLUE) FLIGHT FROM 7 DAYS OUTBOUND FLIGHTS
+     */
     public void clickSelectOutboundFlight() {
         try {
             driver.findElement(outboundFlightSelectBtn).submit();
@@ -179,6 +185,9 @@ public class BookAFlightPage extends BasePage {
         }
     }
 
+    /*
+     METHOD SELECT ONE DEFAULT (BLUE) FLIGHT FROM 7 DAYS INBOUND FLIGHTS
+     */
     public void clickSelectInboundFlight() {
         try {
             driver.findElement(inboundFlightSelectBtn).submit();
@@ -219,6 +228,9 @@ public class BookAFlightPage extends BasePage {
         }
     }
 
+    /*
+     METHOD GETS ONE LAST FLIGHT FROM 7 DAYS INBOUND FLIGHTS
+    */
     public void selectInboundFlight() {
         try {
             WebElement toElement = null;
