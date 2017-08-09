@@ -36,6 +36,6 @@ public class ThreeIdTest extends BaseTest {
         assertEquals(BOOKINGNUMBER, bookingOverviewPage.getBookingNumber());
         assertEquals(DESTINATIONFROM, bookingOverviewPage.getDestinationFrom());
         assertEquals(DESTINATIONTO, bookingOverviewPage.getDestinationTo());
-        //getDriver().close();
+        getDriver().close();
     }
 }

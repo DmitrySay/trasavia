@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MainPage extends BasePage {
     public static final String URL = "https://www.transavia.com/en-EU/home/";
-    private static final String HEADLINE ="Where do you want to go?";
+    private static final String HEADLINE = "Where do you want to go?";
     private static final Logger LOG = Logger.getLogger(MainPage.class);
 
     @FindBy(xpath = "//form[@id='desktop']/section/div[1]/h1")
@@ -20,11 +20,17 @@ public class MainPage extends BasePage {
     @FindBy(id = "routeSelection_DepartureStation-input")
     private WebElement fromField;
 
+    @FindBy(xpath = "//input[@id='routeSelection_DepartureStation-input']/../../../div[2]/span[1]")
+    private WebElement fromFieldAnswer;
+
     @FindBy(xpath = "//div[@class='cc-left']/button")
     private WebElement iunderstendButton;
 
     @FindBy(id = "routeSelection_ArrivalStation-input")
     private WebElement toField;
+
+    @FindBy(xpath = "//input[@id='routeSelection_ArrivalStation-input']/../../../div[2]/span[1]")
+    private WebElement toFieldAnswer;
 
     @FindBy(id = "dateSelection_OutboundDate-datepicker")
     private WebElement departOnDateField;
@@ -74,7 +80,7 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//div[@id='horizontal-sub-navigation-service']/div/div[2]/div/div[2]/div[2]/ul/li[1]/a")
     private WebElement handluggageLocator;
 
-    @FindBy(xpath = "//div[@id='horizontal-sub-navigation-manageyourbooking']/div/div[2]/div/div[1]/div/ul/li[2]/a/div/span[2]")
+    @FindBy(xpath = "//div[@id='horizontal-sub-navigation-manageyourbooking']/div/div[2]/div/div[1]/div/ul/li[2]/a")
     private WebElement viewYourBookingLocator;
 
     @FindBy(xpath = "//form[@id='desktop']/section/div[3]/ul/li[2]/a")
@@ -90,19 +96,28 @@ public class MainPage extends BasePage {
     }
 
 
-    public void clickDestinationLink(){
+    public void clickDestinationLink() {
         destinationsLocator.click();
         LOG.info(" Click on destinations link");
     }
 
     public void clickManageAndThenViewYourBooking() {
-        manageYourBookingLocator.click();
-        LOG.info(" Manage your booking click");
-        viewYourBookingLocator.click();
-        LOG.info(" View your booking click");
+        try {
+            manageYourBookingLocator.click();
+            Thread.sleep(5000);
+            LOG.info(" Manage your booking -click");
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("arguments[0].click();", viewYourBookingLocator);
+            Thread.sleep(5000);
+            //viewYourBookingLocator.click();
+            LOG.info(" View your booking -click");
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    public void clickServiceAndThenHandLuggage(){
+    public void clickServiceAndThenHandLuggage() {
         serviceLocator.click();
         LOG.info(" Service link click");
         handluggageLocator.click();
@@ -114,7 +129,7 @@ public class MainPage extends BasePage {
         try {
             String headlineOnsite = linkText.getText();
             LOG.info(String.format("Headline on site = %s", headlineOnsite));
-            String checkedHeadline =HEADLINE;
+            String checkedHeadline = HEADLINE;
             LOG.info(String.format("Checked headline = %s", checkedHeadline));
             Assert.assertEquals(checkedHeadline, headlineOnsite);
             Thread.sleep(5000);
@@ -129,7 +144,7 @@ public class MainPage extends BasePage {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", iunderstendButton);
             LOG.info("I understand Button click");
-            Thread.sleep(3000);
+            Thread.sleep(7000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -169,11 +184,14 @@ public class MainPage extends BasePage {
             toField.click();
             Thread.sleep(1000);
 
+
             //Destinations from Deperture airport
             List<WebElement> dropdownsToFirthLi = driver.findElements(By.xpath("//ol[@class='results']/li[1]/ol/descendant::li"));
 
+
             //Destinations from other airports:
             List<WebElement> dropdownsToSecondLi = driver.findElements(By.xpath("//ol[@class='results']/li[2]/ol/descendant::li"));
+
 
             for (int i = 0; i < dropdownsToFirthLi.size(); i++) {
                 s = dropdownsToFirthLi.get(i).getText();
@@ -184,6 +202,7 @@ public class MainPage extends BasePage {
                     LOG.info(String.format("destinationTo = %s", destinationTo));
                 }
             }
+
 
             for (int i = 0; i < dropdownsToSecondLi.size(); i++) {
                 s = dropdownsToSecondLi.get(i).getText();
@@ -197,6 +216,37 @@ public class MainPage extends BasePage {
             Assert.assertEquals(destinationTo, destinationToOnsite);
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    public void fillFromFieldAlternative(String destinationFrom) {
+        try {
+            fromField.click();
+            fromField.sendKeys(destinationFrom);
+            departOnDateField.click();
+            String text = fromFieldAnswer.getAttribute("innerHTML");
+            LOG.info(String.format("Destination From on site = %s", text));
+            LOG.info(String.format("Input destination From  = %s", destinationFrom));
+            Assert.assertEquals(destinationFrom, text);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void fillToFieldAlterntive(String destinationTo) {
+        try {
+            toField.click();
+            toField.sendKeys(destinationTo);
+            departOnDateField.click();
+            String destinationToOnsite = toFieldAnswer.getAttribute("innerHTML");
+            LOG.info(String.format("Destination To on site = %s", destinationToOnsite));
+            LOG.info(String.format("Input destination To = %s", destinationTo));
+            Assert.assertEquals(destinationTo, destinationToOnsite);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();

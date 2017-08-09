@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class BookingOverviewPage extends BasePage {
     private static final Logger LOG = Logger.getLogger(BookingOverviewPage.class);
@@ -30,6 +32,7 @@ public class BookingOverviewPage extends BasePage {
 
     public BookingOverviewPage(WebDriver driver) {
         super(driver);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
     }
 
@@ -82,7 +85,6 @@ public class BookingOverviewPage extends BasePage {
         LOG.info(String.format("Payment amount on site is = %s",  paymentAmountLocator.getText()));
         return paymentAmountLocator.getText();
     }
-
 
 }
 

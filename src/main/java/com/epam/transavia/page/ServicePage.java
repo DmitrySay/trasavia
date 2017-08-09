@@ -56,7 +56,7 @@ public class ServicePage extends BasePage {
             executor.executeScript("arguments[0].click();", videoNameLocator);
             LOG.info("Click on Video link");
 
-            String newWindow = (new WebDriverWait(driver, 10))
+            String newWindow = (new WebDriverWait(driver, 20))
                     .until(new ExpectedCondition<String>() {
                                public String apply(WebDriver driver) {
                                    Set<String> newWindowsSet = driver.getWindowHandles();

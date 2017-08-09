@@ -27,7 +27,7 @@ public class OneIdTest extends BaseTest {
         mainPage.clickSearchFlightButton();
         BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());
         bookAFlightPage.isFlightPresent();
-        //getDriver().close();
+        getDriver().close();
     }
 
 }

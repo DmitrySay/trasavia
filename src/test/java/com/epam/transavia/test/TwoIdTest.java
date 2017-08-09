@@ -35,6 +35,6 @@ public class TwoIdTest extends BaseTest {
         ChooseAFarePage chooseAFarePage = new ChooseAFarePage(getDriver());
         chooseAFarePage.clickPlusTitle();
         chooseAFarePage.checkCorrectCalculations();
-      //getDriver().close();
+        getDriver().close();
     }
 }

@@ -28,6 +28,6 @@ public class FourIdTest extends BaseTest {
         assertEquals(BOOKINGOVERVIEWTITLE, bookingOverviewPage.getBookingOverviewPageTitle());
         bookingOverviewPage.clickBookingDetails();
         assertEquals(bookingOverviewPage.getTotalprice(), bookingOverviewPage.getPaymentAmount());
-        //getDriver().close();
+        getDriver().close();
     }
 }

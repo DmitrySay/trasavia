@@ -23,5 +23,7 @@ public class FiveIdTest extends BaseTest {
         Assert.assertEquals(LINK, link);
         String name = servicePage.getvideoNameOnsite();
         servicePage.checkVideoNameAndAuthorOnTheVideoPage(name, AUTHOR);
+
+        getDriver().close();
     }
 }

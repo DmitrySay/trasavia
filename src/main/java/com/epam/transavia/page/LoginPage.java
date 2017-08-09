@@ -26,29 +26,38 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
     }
 
     public String getloginPageTitle() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String actualTitle = driver.getTitle();
         LOG.info(String.format("Login Page Title = %s", actualTitle));
         return actualTitle;
     }
 
     public void doLogin(String bookingNumber, String lastName, String flightDate) {
-        bookingNumberField.click();
-        bookingNumberField.sendKeys(bookingNumber);
-        LOG.info(String.format("Enter booking = %s", bookingNumber));
-        lastNameField.click();
-        lastNameField.sendKeys(lastName);
-        LOG.info(String.format("Enter last name = %s", lastName));
-        flightDateField.click();
-        flightDateField.sendKeys(flightDate);
-        LOG.info(String.format("Enter flight date = %s", flightDate));
-        bookingNumberField.click();
-        viewBookingBtn.submit();
-        LOG.info("Click 'View booking' Button ");
+        try {
+            bookingNumberField.click();
+            bookingNumberField.sendKeys(bookingNumber);
+            LOG.info(String.format("Enter booking = %s", bookingNumber));
+            Thread.sleep(1000);
+            lastNameField.click();
+            lastNameField.sendKeys(lastName);
+            LOG.info(String.format("Enter last name = %s", lastName));
+            Thread.sleep(1000);
+            flightDateField.click();
+            flightDateField.sendKeys(flightDate);
+            LOG.info(String.format("Enter flight date = %s", flightDate));
+            bookingNumberField.click();
+            bookingNumberField.click();
+            Thread.sleep(1000);
+            viewBookingBtn.submit();
+            LOG.info("Click 'View booking' Button ");
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

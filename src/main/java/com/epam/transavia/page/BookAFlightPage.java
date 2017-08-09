@@ -218,10 +218,10 @@ public class BookAFlightPage extends BasePage {
             }
             fromElement.click();
             LOG.info("Choose firth outbound flight");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             driver.findElement(outboundFlightSelectBtn).click();
             LOG.info("Click select outbound flight button");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -247,10 +247,10 @@ public class BookAFlightPage extends BasePage {
             }
             toElement.click();
             LOG.info("Choose  inbound flight");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             driver.findElement(inboundFlightSelectBtn).click();
             LOG.info("Click select inbound flight button");
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
@@ -272,7 +272,7 @@ public class BookAFlightPage extends BasePage {
         try {
             searchButton.click();
             LOG.info("Click 'SEARCH' button");
-            Thread.sleep(5000);
+            Thread.sleep(7000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();

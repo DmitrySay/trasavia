@@ -49,6 +49,6 @@ public class NineIdTest extends BaseTest {
         double totalPrice =chooseAFarePage.getTotalPrice();
         double totalPriceFromDetails = chooseAFarePage.getDetailPrice();
         assertEquals(totalPrice, totalPriceFromDetails);
-        //getDriver().close();
+        getDriver().close();
     }
 }
