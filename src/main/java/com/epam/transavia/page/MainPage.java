@@ -80,6 +80,20 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "//form[@id='desktop']/section/div[3]/ul/li[2]/a")
     private WebElement addMultipleDestinationsLocator;
 
+    @FindBy(xpath = "html/body/header/nav/div[1]/div[2]/ul/li[3]/a")
+    private WebElement destinationsLocator;
+
+
+    public MainPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+    }
+
+
+    public void clickDestinationLink(){
+        destinationsLocator.click();
+        LOG.info(" Click on destinations link");
+    }
 
     public void clickManageAndThenViewYourBooking() {
         manageYourBookingLocator.click();
@@ -95,11 +109,6 @@ public class MainPage extends BasePage {
         LOG.info(" Hand luggage link click");
     }
 
-
-    public MainPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
-    }
 
     public void checkIsMainPageOpened() {
         try {
