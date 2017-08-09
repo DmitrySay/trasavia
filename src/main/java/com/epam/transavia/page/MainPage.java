@@ -118,10 +118,17 @@ public class MainPage extends BasePage {
     }
 
     public void clickServiceAndThenHandLuggage() {
-        serviceLocator.click();
-        LOG.info(" Service link click");
-        handluggageLocator.click();
-        LOG.info(" Hand luggage link click");
+        try {
+            serviceLocator.click();
+            Thread.sleep(5000);
+            LOG.info(" Service link click");
+            handluggageLocator.click();
+            LOG.info(" Hand luggage link click");
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 
@@ -156,7 +163,7 @@ public class MainPage extends BasePage {
             WebElement element = null;
             String s, destinationFromOnsite = "";
             fromField.click();
-            Thread.sleep(1000);
+            Thread.sleep(5000);
             List<WebElement> dropdownsFrom = driver.findElements(By.xpath("//ol[@class='results']/descendant::li"));
             for (int i = 0; i < dropdownsFrom.size(); i++) {
                 s = dropdownsFrom.get(i).getText();
@@ -170,7 +177,7 @@ public class MainPage extends BasePage {
             Assert.assertEquals(destinationFrom, destinationFromOnsite);
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (Exception e) {
             LOG.info(e.getMessage());
             e.printStackTrace();
