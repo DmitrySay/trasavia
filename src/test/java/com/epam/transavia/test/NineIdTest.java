@@ -22,6 +22,7 @@ public class NineIdTest extends BaseTest {
 
     @Test
     public void runNineIdTest() {
+        LOG.info("Start runNineIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();

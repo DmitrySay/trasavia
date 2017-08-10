@@ -77,7 +77,6 @@ public class AdvancedSearchPage extends BasePage {
     public void clickSearchButton() {
         searchBtnLocator.click();
         LOG.info("Click search button");
-
     }
 
     public Boolean checkIfDestinationsAvailable() {

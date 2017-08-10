@@ -14,6 +14,7 @@ public class EightIdTest extends BaseTest {
 
     @Test
     public void runEightIdTest(){
+        LOG.info("Start runEightIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();

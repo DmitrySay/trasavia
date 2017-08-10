@@ -14,6 +14,7 @@ public class FiveIdTest extends BaseTest {
 
     @Test
     public void runFiveIdTest() {
+        LOG.info("Start runFiveIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();

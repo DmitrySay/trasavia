@@ -14,6 +14,7 @@ public class SixIdTest extends BaseTest {
 
     @Test
     public void runSixIdTest() {
+        LOG.info("Start runSixIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();

@@ -15,11 +15,14 @@ public class OneIdTest extends BaseTest {
 
     @Test
     public void runOneIdTest(){
+        LOG.info("Start runOneIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
-        mainPage.fillFromField(DESTINATIONFROM);
-        mainPage.fillToField(DESTINATIONTO);
+      //  mainPage.fillFromField(DESTINATIONFROM);
+      //  mainPage.fillToField(DESTINATIONTO);
+        mainPage.fillFromFieldAlternative(DESTINATIONFROM);
+        mainPage.fillToFieldAlterntive(DESTINATIONTO);
         mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.uncheckReturnOnCheckbox();
         mainPage.checkReturnOnDateFieldIsEmpty();

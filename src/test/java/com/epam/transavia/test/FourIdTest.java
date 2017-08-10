@@ -17,6 +17,7 @@ public class FourIdTest extends BaseTest {
 
     @Test
     public void runFourIdTest() {
+        LOG.info("Start runFourIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();

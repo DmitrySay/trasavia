@@ -93,6 +93,7 @@ public class MainPage extends BasePage {
     public MainPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        LOG.info("Get Access to Main Page");
     }
 
 

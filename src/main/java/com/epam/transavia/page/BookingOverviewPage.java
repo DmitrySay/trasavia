@@ -34,6 +34,7 @@ public class BookingOverviewPage extends BasePage {
         super(driver);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
+        LOG.info("Get Access to Booking Overview Page");
     }
 
     public String getBookingOverviewPageTitle() {

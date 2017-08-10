@@ -16,6 +16,7 @@ public class TwoIdTest extends BaseTest {
 
     @Test
     public void runTwoIdTest() {
+        LOG.info("Start runTwoIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();

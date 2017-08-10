@@ -70,6 +70,13 @@ public class BookAFlightPage extends BasePage {
     @FindBy(xpath = "//form[@id='flights']/div/section/div[3]/div/button[2]")
     private WebElement searchButton;
 
+    public BookAFlightPage(WebDriver driver) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+        LOG.info("Get Access to Book A Flight Page");
+    }
+
+
     public String fillToOutboundField(String outDestinationTo) {
         outToField.click();
         outToField.sendKeys(outDestinationTo);
@@ -130,11 +137,6 @@ public class BookAFlightPage extends BasePage {
         LOG.info(String.format("Inbound flight date = %s", indepartDate));
         LOG.info(String.format("Inbound flight date on site = %s", text));
         return text;
-    }
-
-    public BookAFlightPage(WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public Boolean getMessage() {

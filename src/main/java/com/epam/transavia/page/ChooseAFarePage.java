@@ -46,6 +46,7 @@ public class ChooseAFarePage extends BasePage {
     public ChooseAFarePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        LOG.info("Get Access to Choose A Fare Page");
     }
 
     public void clickPlusTitle() {

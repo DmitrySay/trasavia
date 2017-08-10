@@ -20,6 +20,7 @@ public class ThreeIdTest extends BaseTest {
 
     @Test
     public void runThreeIdTest() {
+        LOG.info("Start runThreeIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.clickIunderstandBtn();
         mainPage.clickManageAndThenViewYourBooking();
