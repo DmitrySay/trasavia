@@ -26,9 +26,9 @@ public class SixIdTest extends BaseTest {
         advancedSearchPage.clickWhatIsYourBudgetPerPersonLink();
         advancedSearchPage.fillMyBudgetField(MYBUDGET);
         advancedSearchPage.clickSearchButton();
-
-         advancedSearchPage.checkIfDestinationsAvailable();
+        advancedSearchPage.checkIfDestinationsAvailable();
         //Assert.assertTrue(advancedSearchPage.checkIfDestinationsAvailable());
+        Assert.assertFalse(advancedSearchPage.checkIfDestinationsAvailable());
         getDriver().close();
     }
 }

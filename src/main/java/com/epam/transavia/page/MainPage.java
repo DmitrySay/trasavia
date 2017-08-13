@@ -74,8 +74,14 @@ public class MainPage extends BasePage {
     @FindBy(xpath = "html/body/header/nav/div[1]/div[1]/ul/li[3]/a")
     private WebElement manageYourBookingLocator;
 
+    @FindBy(xpath = "html/body/header/nav/div[1]/div[1]/ul/li[2]/a")
+    private WebElement planAndBookLocator;
+
     @FindBy(xpath = "html/body/header/nav/div[1]/div[1]/ul/li[4]/a")
     private WebElement serviceLocator;
+
+    @FindBy(xpath = "//div[@id='horizontal-sub-navigation-planandbook']/div/div[2]/div/div[2]/div[2]/ul/li[6]/a")
+    private WebElement advancedSearchLocator;
 
     @FindBy(xpath = "//div[@id='horizontal-sub-navigation-service']/div/div[2]/div/div[2]/div[2]/ul/li[1]/a")
     private WebElement handluggageLocator;
@@ -94,6 +100,20 @@ public class MainPage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Main Page");
+    }
+
+    public AdvancedSearchPage clickPlanAndBookAndThenAdvancedSearch() {
+        try {
+            planAndBookLocator.click();
+            Thread.sleep(1000);
+            advancedSearchLocator.click();
+            Thread.sleep(5000);
+            return new AdvancedSearchPage(driver);
+        } catch (Exception e) {
+            LOG.info(e.getMessage());
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
