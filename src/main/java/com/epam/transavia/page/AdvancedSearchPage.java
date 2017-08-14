@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -65,96 +66,61 @@ public class AdvancedSearchPage extends BasePage {
     }
 
     public void fillFromField(String destinationFrom) {
-        try {
-            fromFieldLocator.click();
-            fromFieldLocator.sendKeys(destinationFrom);
-            LOG.info(String.format("Input destination FROM = %s", destinationFrom));
-            Thread.sleep(1000);
-            String destinationFromOnsite = fromFieldLocator.getAttribute("value");
-            LOG.info(String.format("Destination From on site is = %s", destinationFromOnsite));
-            Assert.assertEquals(destinationFrom, destinationFromOnsite);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        fromFieldLocator.click();
+        fromFieldLocator.sendKeys(destinationFrom);
+        LOG.info(String.format("Input destination FROM = %s", destinationFrom));
+        WaitHelper.waitSeconds(1000);
+        String destinationFromOnsite = fromFieldLocator.getAttribute("value");
+        LOG.info(String.format("Destination From on site is = %s", destinationFromOnsite));
+        Assert.assertEquals(destinationFrom, destinationFromOnsite);
     }
 
     public void fillToField(String destinationTo) {
-        try {
-            toFieldLocator.click();
-            toFieldLocator.sendKeys(destinationTo);
-            LOG.info(String.format("Input destination TO = %s", destinationTo));
-            Thread.sleep(1000);
-            String destinationToOnsite = toFieldLocator.getAttribute("value");
-            LOG.info(String.format("Destination To on site is = %s", destinationToOnsite));
-            Assert.assertEquals(destinationTo, destinationToOnsite);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        toFieldLocator.click();
+        toFieldLocator.sendKeys(destinationTo);
+        LOG.info(String.format("Input destination TO = %s", destinationTo));
+        WaitHelper.waitSeconds(1000);
+        String destinationToOnsite = toFieldLocator.getAttribute("value");
+        LOG.info(String.format("Destination To on site is = %s", destinationToOnsite));
+        Assert.assertEquals(destinationTo, destinationToOnsite);
     }
 
     public void clickWhatIsYourBudgetPerPersonLink() {
-        try {
-            whatIsYourBudgetPerPersonLocator.click();
-            LOG.info("Click 'What Is Your Budget Per Person' Link");
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        whatIsYourBudgetPerPersonLocator.click();
+        LOG.info("Click 'What Is Your Budget Per Person' Link");
+        WaitHelper.waitSeconds(2000);
     }
 
     public void clickWhenWillYouBeTakingOffLink() {
-        try {
-            whenWillYouBeTakingOffLocator.click();
-            Thread.sleep(2000);
-            LOG.info("Click 'When will you be taking off' link");
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        whenWillYouBeTakingOffLocator.click();
+        WaitHelper.waitSeconds(2000);
+        LOG.info("Click 'When will you be taking off' link");
     }
 
     public void selectTypeOfFlight(String typeOfFlight) {
-        try {
-            Select select = new Select(selectFlightTypeLocator);
-            select.selectByVisibleText(typeOfFlight);
-            Thread.sleep(2000);
-            LOG.info("Click 'When will you be taking off' link");
-            String typeFlightLocatorOnSite = checkFlightTypeLocator.getAttribute("innerHTML");
-            LOG.info(String.format("Type of Flight Locator On Site = %s", typeFlightLocatorOnSite));
-            LOG.info(String.format("Input type of Flight Locator = %s", typeOfFlight));
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        Select select = new Select(selectFlightTypeLocator);
+        select.selectByVisibleText(typeOfFlight);
+        WaitHelper.waitSeconds(2000);
+        LOG.info("Click 'When will you be taking off' link");
+        String typeFlightLocatorOnSite = checkFlightTypeLocator.getAttribute("innerHTML");
+        LOG.info(String.format("Type of Flight Locator On Site = %s", typeFlightLocatorOnSite));
+        LOG.info(String.format("Input type of Flight Locator = %s", typeOfFlight));
     }
 
     public void selectSpecificMonthSingleFlight(String month) {
-        try {
-            Select select = new Select(specificMonthSingleFlightLocator);
-            select.selectByVisibleText(month);
-            Thread.sleep(2000);
-            LOG.info("Click 'Specific month' ");
-            String monthOnSite = checkSpecificMonthLocator.getAttribute("innerHTML");
-            LOG.info(String.format("Specific month On Site = %s", monthOnSite));
-            LOG.info(String.format("Input month = %s", month));
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        Select select = new Select(specificMonthSingleFlightLocator);
+        select.selectByVisibleText(month);
+        WaitHelper.waitSeconds(2000);
+        LOG.info("Click 'Specific month' ");
+        String monthOnSite = checkSpecificMonthLocator.getAttribute("innerHTML");
+        LOG.info(String.format("Specific month On Site = %s", monthOnSite));
+        LOG.info(String.format("Input month = %s", month));
     }
 
     public void clickSearchButton() {
-        try {
-            searchBtnLocator.click();
-            Thread.sleep(5000);
-            LOG.info("Click search button");
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        searchBtnLocator.click();
+        WaitHelper.waitSeconds(5000);
+        LOG.info("Click search button");
     }
 
     public Boolean checkIfDestinationsAvailable() {
@@ -170,21 +136,15 @@ public class AdvancedSearchPage extends BasePage {
     }
 
     public void fillMyBudgetField(String mybudget) {
-        try {
-            myBudgetLocator.click();
-            myBudgetLocator.sendKeys(mybudget);
-            LOG.info(String.format("My input budget = %s", mybudget));
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        myBudgetLocator.click();
+        myBudgetLocator.sendKeys(mybudget);
+        LOG.info(String.format("My input budget = %s", mybudget));
+        WaitHelper.waitSeconds(2000);
     }
 
-    public String getCitynameAndPriceFromFirthRow(){
-        String text = cityNameLocator.getText()+", "+countryNameLocator.getText()+"; "+priceFromFirthRowLocator.getText()+" евро";
+    public String getCitynameAndPriceFromFirthRow() {
+        String text = cityNameLocator.getText() + ", " + countryNameLocator.getText() + "; " + priceFromFirthRowLocator.getText() + " евро";
         LOG.info(String.format("Text on site = %s", text));
         return text;
     }
-
 }
