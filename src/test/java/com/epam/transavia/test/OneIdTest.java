@@ -19,16 +19,15 @@ public class OneIdTest extends BaseTest {
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
-      //  mainPage.fillFromField(DESTINATIONFROM);
-      //  mainPage.fillToField(DESTINATIONTO);
-        mainPage.fillFromFieldAlternative(DESTINATIONFROM);
-        mainPage.fillToFieldAlterntive(DESTINATIONTO);
+        mainPage.fillFromField(DESTINATIONFROM);
+        mainPage.fillToField(DESTINATIONTO);
+//        mainPage.fillFromFieldAlternative(DESTINATIONFROM);
+//        mainPage.fillToFieldAlterntive(DESTINATIONTO);
         mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.uncheckReturnOnCheckbox();
         mainPage.checkReturnOnDateFieldIsEmpty();
         mainPage.checkOneAdultInPassengers();
-        mainPage.clickSearchFlightButton();
-        BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());
+        BookAFlightPage bookAFlightPage =  mainPage.clickSearchFlightButton();
         bookAFlightPage.isFlightPresent();
         getDriver().close();
     }

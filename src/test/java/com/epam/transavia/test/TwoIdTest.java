@@ -25,8 +25,7 @@ public class TwoIdTest extends BaseTest {
         mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.fillReturOnDateField(RETURNDATE);
         mainPage.addOneAdultandOneChild();
-        mainPage.clickSearchFlightButton();
-        BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());
+        BookAFlightPage bookAFlightPage = mainPage.clickSearchFlightButton();
         bookAFlightPage.isFlightPresent();
         bookAFlightPage.findTitleInboundFlight();
         bookAFlightPage.findTitleOutboundFlight();

@@ -18,10 +18,8 @@ public class SixIdTest extends BaseTest {
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
-        mainPage.clickDestinationLink();
-        DestinationsPage destinationsPage = new DestinationsPage(getDriver());
-        destinationsPage.clickPerfectDestinationLink();
-        AdvancedSearchPage advancedSearchPage = new AdvancedSearchPage(getDriver());
+        DestinationsPage destinationsPage = mainPage.clickDestinationLink();
+        AdvancedSearchPage advancedSearchPage = destinationsPage.clickPerfectDestinationLink();
         advancedSearchPage.fillFromField(FROM);
         advancedSearchPage.clickWhatIsYourBudgetPerPersonLink();
         advancedSearchPage.fillMyBudgetField(MYBUDGET);

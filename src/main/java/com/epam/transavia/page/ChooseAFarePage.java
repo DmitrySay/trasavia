@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -50,26 +51,15 @@ public class ChooseAFarePage extends BasePage {
     }
 
     public void clickPlusTitle() {
-        try {
-            plusTitle.click();
-            LOG.info("Click Plus Title");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
-
+        plusTitle.click();
+        LOG.info("Click Plus Title");
+        WaitHelper.waitSeconds(5000);
     }
 
     public void clickBtnSelectInPlusTab() {
-        try {
-            selectedPlusBtn.click();
-            LOG.info("Click 'select' button in 'plus' tab");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        selectedPlusBtn.click();
+        LOG.info("Click 'select' button in 'plus' tab");
+        WaitHelper.waitSeconds(5000);
     }
 
     /*
@@ -112,33 +102,21 @@ public class ChooseAFarePage extends BasePage {
     Method gets total price
      */
     public double getTotalPrice() {
-        try {
-            Thread.sleep(3000);
-            double totalCostBefore = getPricefromElement(totalCostBeforeDotBasic);
-            LOG.info(String.format("Total price on site = %.2f", totalCostBefore));
-            return totalCostBefore;
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
-        return 0.0d;
+        WaitHelper.waitSeconds(3000);
+        double totalCostBefore = getPricefromElement(totalCostBeforeDotBasic);
+        LOG.info(String.format("Total price on site = %.2f", totalCostBefore));
+        return totalCostBefore;
     }
 
     public double getDetailPrice() {
-        try {
-            detailsLinklocator.click();
-            Thread.sleep(3000);
-            double outboundPrice = getPricefromElement(outboundPricelocator);
-            LOG.info(String.format("Outbound flight price on site = %.2f", outboundPrice));
-            double intboundPrice = getPricefromElement(inboundPricelocator);
-            LOG.info(String.format("Inbound flight price on site = %.2f", intboundPrice));
-            double total = outboundPrice + intboundPrice;
-            LOG.info(String.format("Total price on site in detail tab = %.2f", total));
-            return total;
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
-        return 0.0d;
+        detailsLinklocator.click();
+        WaitHelper.waitSeconds(3000);
+        double outboundPrice = getPricefromElement(outboundPricelocator);
+        LOG.info(String.format("Outbound flight price on site = %.2f", outboundPrice));
+        double intboundPrice = getPricefromElement(inboundPricelocator);
+        LOG.info(String.format("Inbound flight price on site = %.2f", intboundPrice));
+        double total = outboundPrice + intboundPrice;
+        LOG.info(String.format("Total price on site in detail tab = %.2f", total));
+        return total;
     }
 }

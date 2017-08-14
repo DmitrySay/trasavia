@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,7 +27,6 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Login Page");
     }
@@ -37,28 +37,24 @@ public class LoginPage extends BasePage {
         return actualTitle;
     }
 
-    public void doLogin(String bookingNumber, String lastName, String flightDate) {
-        try {
+    public BookingOverviewPage doLogin(String bookingNumber, String lastName, String flightDate) {
             bookingNumberField.click();
             bookingNumberField.sendKeys(bookingNumber);
             LOG.info(String.format("Enter booking = %s", bookingNumber));
-            Thread.sleep(1000);
+            WaitHelper.waitSeconds(1000);
             lastNameField.click();
             lastNameField.sendKeys(lastName);
             LOG.info(String.format("Enter last name = %s", lastName));
-            Thread.sleep(1000);
+            WaitHelper.waitSeconds(1000);
             flightDateField.click();
             flightDateField.sendKeys(flightDate);
             LOG.info(String.format("Enter flight date = %s", flightDate));
             bookingNumberField.click();
             bookingNumberField.click();
-            Thread.sleep(1000);
+            WaitHelper.waitSeconds(1000);
             viewBookingBtn.submit();
             LOG.info("Click 'View booking' Button ");
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+            return new BookingOverviewPage(driver);
     }
 
 }

@@ -20,8 +20,7 @@ public class EightIdTest extends BaseTest {
         mainPage.clickIunderstandBtn();
         mainPage.fillFromField(DESTINATIONFROM);
         mainPage.fillToField(DESTINATIONTO);
-        mainPage.clickSearchFlightButton();
-        BookAFlightPage bookAFlightPage = new BookAFlightPage(getDriver());
+        BookAFlightPage bookAFlightPage =  mainPage.clickSearchFlightButton();
         assertTrue(bookAFlightPage.getMessage());
         getDriver().close();
     }

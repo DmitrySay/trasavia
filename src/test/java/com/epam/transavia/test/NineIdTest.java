@@ -27,26 +27,25 @@ public class NineIdTest extends BaseTest {
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
         BookAFlightPage bookAFlightPage = mainPage.clickAddMultipleDestinationsLink();
+
         String outdestinationFrom = bookAFlightPage.fillFromOutboundField(OUTDESTINATIONFROM);
         assertEquals(OUTDESTINATIONFROM, outdestinationFrom);
         String outdestinationTo = bookAFlightPage.fillToOutboundField(OUTDESTINATIONTO);
         assertEquals(OUTDESTINATIONTO, outdestinationTo);
-
         String outDepartDate= bookAFlightPage.fillOutDateField(OUTDEPARTDATE);
         assertEquals(OUTDEPARTDATE, outDepartDate);
-
         String indestinationFrom = bookAFlightPage.fillFromInboundField(INDESTINATIONFROM);
         assertEquals(INDESTINATIONFROM, indestinationFrom);
         String indestinationTo = bookAFlightPage.fillToInboundField(INDESTINATIONTO);
         assertEquals(INDESTINATIONTO, indestinationTo);
         String inDepartDate= bookAFlightPage.fillInDateField(INDEPARTDATE);
         assertEquals(INDEPARTDATE, inDepartDate);
+
         bookAFlightPage.clickSearchBtn();
         bookAFlightPage.clickSelectOutboundFlight();
         bookAFlightPage.clickSelectInboundFlight();
-        bookAFlightPage.clickBtnNext();
 
-        ChooseAFarePage chooseAFarePage = new ChooseAFarePage(getDriver());
+        ChooseAFarePage chooseAFarePage = bookAFlightPage.clickBtnNext();
         double totalPrice =chooseAFarePage.getTotalPrice();
         double totalPriceFromDetails = chooseAFarePage.getDetailPrice();
         assertEquals(totalPrice, totalPriceFromDetails);

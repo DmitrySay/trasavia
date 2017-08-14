@@ -30,9 +30,7 @@ public class ThreeIdTest extends BaseTest {
         String actualTitle = loginPage.getloginPageTitle();
         LOG.info(String.format("Actual title  = %s", actualTitle));
         assertEquals(expectedTitle, actualTitle);
-        loginPage.doLogin(BOOKINGNUMBER, LASTNAME, FLIGHTDATE);
-
-        BookingOverviewPage bookingOverviewPage = new BookingOverviewPage(getDriver());
+        BookingOverviewPage bookingOverviewPage = loginPage.doLogin(BOOKINGNUMBER, LASTNAME, FLIGHTDATE);
         assertEquals(BOOKINGOVERVIEWTITLE, bookingOverviewPage.getBookingOverviewPageTitle());
         assertEquals(BOOKINGNUMBER, bookingOverviewPage.getBookingNumber());
         assertEquals(DESTINATIONFROM, bookingOverviewPage.getDestinationFrom());

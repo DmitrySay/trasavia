@@ -8,11 +8,11 @@ import org.testng.annotations.Test;
 
 public class SevenIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(SevenIdTest.class);
-    private static final String DESTINATIONFROM ="Netherlands";
-    private static final String DESTINATIONTO ="Nice, France";
-    private static final String SINGLEFLIGHT ="Single flight";
-    private static final String MONTH ="September 2017";
-    private static final String RESULT ="Nice, France; 29 евро";
+    private static final String DESTINATIONFROM = "Netherlands";
+    private static final String DESTINATIONTO = "France";
+    private static final String SINGLEFLIGHT = "Single flight";
+    private static final String MONTH = "September 2017";
+    private static final String RESULT = "Nice, France; 29 евро";
 
     @Test
     public void runSevenIdTest() {
@@ -30,8 +30,7 @@ public class SevenIdTest extends BaseTest {
         Assert.assertTrue(advancedSearchPage.checkIfDestinationsAvailable());
         LOG.info(String.format("Check input result = %s", RESULT));
         Assert.assertEquals(RESULT, advancedSearchPage.getCitynameAndPriceFromFirthRow());
-
-
+        getDriver().close();
     }
 }
 

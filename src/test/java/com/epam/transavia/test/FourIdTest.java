@@ -23,9 +23,7 @@ public class FourIdTest extends BaseTest {
         mainPage.clickIunderstandBtn();
         mainPage.clickManageAndThenViewYourBooking();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.doLogin(BOOKINGNUMBER, LASTNAME, FLIGHTDATE);
-
-        BookingOverviewPage bookingOverviewPage = new BookingOverviewPage(getDriver());
+        BookingOverviewPage bookingOverviewPage = loginPage.doLogin(BOOKINGNUMBER, LASTNAME, FLIGHTDATE);
         assertEquals(BOOKINGOVERVIEWTITLE, bookingOverviewPage.getBookingOverviewPageTitle());
         bookingOverviewPage.clickBookingDetails();
         assertEquals(bookingOverviewPage.getTotalprice(), bookingOverviewPage.getPaymentAmount());

@@ -19,12 +19,12 @@ public class DestinationsPage extends BasePage {
     public DestinationsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LOG.info("Get Access to Destinations Page");
     }
 
-    public void clickPerfectDestinationLink(){
+    public AdvancedSearchPage clickPerfectDestinationLink(){
         findThePerfectDestinationLocator.click();
         LOG.info(" Click on  'Find the perfect destination' link");
+        return new AdvancedSearchPage(driver);
      }
 }

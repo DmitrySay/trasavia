@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -47,44 +48,39 @@ public class ServicePage extends BasePage {
     }
 
     public void checkVideoNameAndAuthorOnTheVideoPage(String videoName, String videoAuthor) {
-        try {
-            String originalWindow = driver.getWindowHandle();
-            final Set<String> oldWindowsSet = driver.getWindowHandles();
+        String originalWindow = driver.getWindowHandle();
+        final Set<String> oldWindowsSet = driver.getWindowHandles();
 
-            driver.switchTo().frame(iframeLocator);
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", videoNameLocator);
-            LOG.info("Click on Video link");
+        driver.switchTo().frame(iframeLocator);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", videoNameLocator);
+        LOG.info("Click on Video link");
 
-            String newWindow = (new WebDriverWait(driver, 30))
-                    .until(new ExpectedCondition<String>() {
-                               public String apply(WebDriver driver) {
-                                   Set<String> newWindowsSet = driver.getWindowHandles();
-                                   newWindowsSet.removeAll(oldWindowsSet);
-                                   return newWindowsSet.size() > 0 ?
-                                           newWindowsSet.iterator().next() : null;
-                               }
+        String newWindow = (new WebDriverWait(driver, 30))
+                .until(new ExpectedCondition<String>() {
+                           public String apply(WebDriver driver) {
+                               Set<String> newWindowsSet = driver.getWindowHandles();
+                               newWindowsSet.removeAll(oldWindowsSet);
+                               return newWindowsSet.size() > 0 ?
+                                       newWindowsSet.iterator().next() : null;
                            }
-                    );
-            driver.switchTo().window(newWindow);
-            Thread.sleep(5000);
-            WebElement videoNameOnYoutube = driver.findElement(By.xpath("//span[@id='eow-title']"));
-            String vnameOnYoutube = videoNameOnYoutube.getText();
-            LOG.info(String.format("Video name on youtube = %s", vnameOnYoutube));
-            LOG.info(String.format("Video name on site = %s", videoName));
-            WebElement videoAuthorOnYoutube = driver.findElement(By.xpath("//div[@id='watch7-user-header']/div/a"));
-            String vAuthorOnYoutube = videoAuthorOnYoutube.getText();
-            LOG.info(String.format("Video author on youtube = %s", vAuthorOnYoutube));
-            LOG.info(String.format("Video author on site = %s", videoAuthor));
-            driver.close();
-            driver.switchTo().window(originalWindow);
-            Assert.assertEquals(videoName, vnameOnYoutube);
-            Assert.assertEquals(videoAuthor, vAuthorOnYoutube);
-        } catch (Exception e) {
-            LOG.info("Page or frame not found");
-            LOG.info(e.getMessage());
-            Assert.fail("Page or frame not found");
-        }
+                       }
+                );
+        driver.switchTo().window(newWindow);
+        WaitHelper.waitSeconds(5000);
+        WebElement videoNameOnYoutube = driver.findElement(By.xpath("//span[@id='eow-title']"));
+        String vnameOnYoutube = videoNameOnYoutube.getText();
+        LOG.info(String.format("Video name on youtube = %s", vnameOnYoutube));
+        LOG.info(String.format("Video name on site = %s", videoName));
+        WebElement videoAuthorOnYoutube = driver.findElement(By.xpath("//div[@id='watch7-user-header']/div/a"));
+        String vAuthorOnYoutube = videoAuthorOnYoutube.getText();
+        LOG.info(String.format("Video author on youtube = %s", vAuthorOnYoutube));
+        LOG.info(String.format("Video author on site = %s", videoAuthor));
+        driver.close();
+        driver.switchTo().window(originalWindow);
+        Assert.assertEquals(videoName, vnameOnYoutube);
+        Assert.assertEquals(videoAuthor, vAuthorOnYoutube);
+
     }
 
 }

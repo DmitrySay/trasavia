@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -177,107 +178,79 @@ public class BookAFlightPage extends BasePage {
      METHOD SELECT ONE DEFAULT (BLUE) FLIGHT FROM 7 DAYS OUTBOUND FLIGHTS
      */
     public void clickSelectOutboundFlight() {
-        try {
-            driver.findElement(outboundFlightSelectBtn).submit();
-            LOG.info("Click select outbound flight button");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        driver.findElement(outboundFlightSelectBtn).submit();
+        LOG.info("Click select outbound flight button");
+        WaitHelper.waitSeconds(5000);
     }
 
     /*
      METHOD SELECT ONE DEFAULT (BLUE) FLIGHT FROM 7 DAYS INBOUND FLIGHTS
      */
     public void clickSelectInboundFlight() {
-        try {
-            driver.findElement(inboundFlightSelectBtn).submit();
-            LOG.info("Click select inbound flight button");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        driver.findElement(inboundFlightSelectBtn).submit();
+        LOG.info("Click select inbound flight button");
+        WaitHelper.waitSeconds(5000);
     }
 
     /*
     METHOD GETS ONE FIRST FLIGHT FROM 7 DAYS OUTBOUND FLIGHTS
      */
     public void selectOutboundFlight() {
-        try {
-            WebElement fromElement = null;
-            List<WebElement> elementList = driver.findElements(outboundFlightLocator);
-            for (int i = 0; i < elementList.size(); i++) {
-                WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
-                if (el.getAttribute("class").equals("price")) {
-                    fromElement = driver.findElement(By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
-                    break;
-                }
+        WebElement fromElement = null;
+        List<WebElement> elementList = driver.findElements(outboundFlightLocator);
+        for (int i = 0; i < elementList.size(); i++) {
+            WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
+            if (el.getAttribute("class").equals("price")) {
+                fromElement = driver.findElement(By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
+                break;
             }
-            if (fromElement == null) {
-                fail("Flight is not found");
-            }
-            fromElement.click();
-            LOG.info("Choose firth outbound flight");
-            Thread.sleep(5000);
-            driver.findElement(outboundFlightSelectBtn).click();
-            LOG.info("Click select outbound flight button");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
         }
+        if (fromElement == null) {
+            fail("Flight is not found");
+        }
+        fromElement.click();
+        LOG.info("Choose firth outbound flight");
+        WaitHelper.waitSeconds(5000);
+        driver.findElement(outboundFlightSelectBtn).click();
+        LOG.info("Click select outbound flight button");
+        WaitHelper.waitSeconds(5000);
     }
 
     /*
      METHOD GETS ONE LAST FLIGHT FROM 7 DAYS INBOUND FLIGHTS
     */
     public void selectInboundFlight() {
-        try {
-            WebElement toElement = null;
-            List<WebElement> elementList = driver.findElements(inboundFlightLocator);
-            for (int i = 0; i < elementList.size(); i++) {
-                WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
-                if (el.getAttribute("class").equals("price")) {
-                    toElement = driver.findElement(By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
-                    // break;
-                }
+        WebElement toElement = null;
+        List<WebElement> elementList = driver.findElements(inboundFlightLocator);
+        for (int i = 0; i < elementList.size(); i++) {
+            WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
+            if (el.getAttribute("class").equals("price")) {
+                toElement = driver.findElement(By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
+                // break;
             }
-            if (toElement == null) {
-                fail("Flight is not found");
-            }
-            toElement.click();
-            LOG.info("Choose  inbound flight");
-            Thread.sleep(5000);
-            driver.findElement(inboundFlightSelectBtn).click();
-            LOG.info("Click select inbound flight button");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
         }
+        if (toElement == null) {
+            fail("Flight is not found");
+        }
+        toElement.click();
+        LOG.info("Choose  inbound flight");
+        WaitHelper.waitSeconds(5000);
+        driver.findElement(inboundFlightSelectBtn).click();
+        LOG.info("Click select inbound flight button");
+        WaitHelper.waitSeconds(5000);
     }
 
-    public void clickBtnNext() {
-        try {
-            nextBtn.click();
-            LOG.info("Click 'NEXT' button");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public ChooseAFarePage clickBtnNext() {
+        nextBtn.click();
+        LOG.info("Click 'NEXT' button");
+        WaitHelper.waitSeconds(5000);
+        return new ChooseAFarePage(driver);
+
     }
 
     public void clickSearchBtn() {
-        try {
-            searchButton.click();
-            LOG.info("Click 'SEARCH' button");
-            Thread.sleep(7000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        searchButton.click();
+        LOG.info("Click 'SEARCH' button");
+        WaitHelper.waitSeconds(7000);
     }
 }

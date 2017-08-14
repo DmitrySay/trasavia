@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -103,249 +104,187 @@ public class MainPage extends BasePage {
     }
 
     public AdvancedSearchPage clickPlanAndBookAndThenAdvancedSearch() {
-        try {
-            planAndBookLocator.click();
-            Thread.sleep(1000);
-            advancedSearchLocator.click();
-            Thread.sleep(5000);
-            return new AdvancedSearchPage(driver);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
+        planAndBookLocator.click();
+        LOG.info(" Click on 'plan and book' link");
+        WaitHelper.waitSeconds(1000);
+        advancedSearchLocator.click();
+        LOG.info(" Click on 'advanced search' link");
+        WaitHelper.waitSeconds(5000);
+        return new AdvancedSearchPage(driver);
     }
 
-
-    public void clickDestinationLink() {
+    public DestinationsPage clickDestinationLink() {
         destinationsLocator.click();
         LOG.info(" Click on destinations link");
+        return new DestinationsPage(driver);
     }
 
     public void clickManageAndThenViewYourBooking() {
-        try {
-            manageYourBookingLocator.click();
-            Thread.sleep(5000);
-            LOG.info(" Manage your booking -click");
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", viewYourBookingLocator);
-            Thread.sleep(5000);
-            //viewYourBookingLocator.click();
-            LOG.info(" View your booking -click");
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        manageYourBookingLocator.click();
+        WaitHelper.waitSeconds(2000);
+        LOG.info(" Manage your booking -click");
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", viewYourBookingLocator);
+        WaitHelper.waitSeconds(2000);
+        LOG.info(" View your booking -click");
     }
 
-    public void clickServiceAndThenHandLuggage() {
-        try {
-            serviceLocator.click();
-            Thread.sleep(5000);
-            LOG.info(" Service link click");
-            handluggageLocator.click();
-            LOG.info(" Hand luggage link click");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public ServicePage clickServiceAndThenHandLuggage() {
+        serviceLocator.click();
+        WaitHelper.waitSeconds(5000);
+        LOG.info(" Service link click");
+        handluggageLocator.click();
+        LOG.info(" Hand luggage link click");
+        WaitHelper.waitSeconds(5000);
+        return new ServicePage(driver);
     }
-
 
     public void checkIsMainPageOpened() {
-        try {
-            String headlineOnsite = linkText.getText();
-            LOG.info(String.format("Headline on site = %s", headlineOnsite));
-            String checkedHeadline = HEADLINE;
-            LOG.info(String.format("Checked headline = %s", checkedHeadline));
-            Assert.assertEquals(checkedHeadline, headlineOnsite);
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        String headlineOnsite = linkText.getText();
+        LOG.info(String.format("Headline on site = %s", headlineOnsite));
+        String checkedHeadline = HEADLINE;
+        LOG.info(String.format("Checked headline = %s", checkedHeadline));
+        Assert.assertEquals(checkedHeadline, headlineOnsite);
+        WaitHelper.waitSeconds(5000);
     }
 
     public void clickIunderstandBtn() {
-        try {
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", iunderstendButton);
-            LOG.info("I understand Button click");
-            Thread.sleep(7000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", iunderstendButton);
+        LOG.info("I understand Button click");
+        WaitHelper.waitSeconds(5000);
     }
 
-    public void fillFromField(String destinationFrom) {
-        try {
-            WebElement element = null;
-            String s, destinationFromOnsite = "";
-            fromField.click();
-            Thread.sleep(5000);
-            List<WebElement> dropdownsFrom = driver.findElements(By.xpath("//ol[@class='results']/descendant::li"));
-            for (int i = 0; i < dropdownsFrom.size(); i++) {
-                s = dropdownsFrom.get(i).getText();
-                if (destinationFrom.equals(s)) {
-                    element = driver.findElement(By.xpath("//ol[@class='results']/li[" + (i + 1) + "]"));
-                    destinationFromOnsite = element.getText();
-                    LOG.info(String.format("Destination From on site = %s", element.getText()));
-                    LOG.info(String.format("Destination From checked = %s", destinationFrom));
-                }
+    public String fillFromField(String destinationFrom) {
+        WebElement element = null;
+        String s, destinationFromOnsite = "";
+        fromField.click();
+        WaitHelper.waitSeconds(5000);
+        List<WebElement> dropdownsFrom = driver.findElements(By.xpath("//ol[@class='results']/descendant::li"));
+        for (int i = 0; i < dropdownsFrom.size(); i++) {
+            s = dropdownsFrom.get(i).getText();
+            if (destinationFrom.equals(s)) {
+                element = driver.findElement(By.xpath("//ol[@class='results']/li[" + (i + 1) + "]"));
+                destinationFromOnsite = element.getText();
+                LOG.info(String.format("Destination From on site = %s", destinationFromOnsite));
+                LOG.info(String.format("Destination From checked = %s", destinationFrom));
             }
-            Assert.assertEquals(destinationFrom, destinationFromOnsite);
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", element);
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
         }
+        Assert.assertEquals(destinationFrom, destinationFromOnsite);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        WaitHelper.waitSeconds(5000);
+        return destinationFromOnsite;
     }
 
-    public void fillToField(String destinationTo) {
-        try {
-            WebElement element = null;
-            String s, destinationToOnsite = "";
-            toField.click();
-            Thread.sleep(1000);
+    public String fillToField(String destinationTo) {
+        WebElement element = null;
+        String s, destinationToOnsite = "";
+        toField.click();
+        WaitHelper.waitSeconds(1000);
 
+        //Destinations from Deperture airport
+        List<WebElement> dropdownsToFirthLi = driver.findElements(By.xpath("//ol[@class='results']/li[1]/ol/descendant::li"));
+        //Destinations from other airports:
+        List<WebElement> dropdownsToSecondLi = driver.findElements(By.xpath("//ol[@class='results']/li[2]/ol/descendant::li"));
 
-            //Destinations from Deperture airport
-            List<WebElement> dropdownsToFirthLi = driver.findElements(By.xpath("//ol[@class='results']/li[1]/ol/descendant::li"));
-
-
-            //Destinations from other airports:
-            List<WebElement> dropdownsToSecondLi = driver.findElements(By.xpath("//ol[@class='results']/li[2]/ol/descendant::li"));
-
-
-            for (int i = 0; i < dropdownsToFirthLi.size(); i++) {
-                s = dropdownsToFirthLi.get(i).getText();
-                if (destinationTo.equals(s)) {
-                    element = driver.findElement(By.xpath("//ol[@class='results']/li[1]/ol/li[" + (i + 1) + "]"));
-                    destinationToOnsite = element.getText();
-                    LOG.info(String.format("destinationToOnsite = %s", element.getText()));
-                    LOG.info(String.format("destinationTo = %s", destinationTo));
-                }
+        for (int i = 0; i < dropdownsToFirthLi.size(); i++) {
+            s = dropdownsToFirthLi.get(i).getText();
+            if (destinationTo.equals(s)) {
+                element = driver.findElement(By.xpath("//ol[@class='results']/li[1]/ol/li[" + (i + 1) + "]"));
+                destinationToOnsite = element.getText();
+                LOG.info(String.format("destinationToOnsite = %s", element.getText()));
+                LOG.info(String.format("destinationTo = %s", destinationTo));
             }
+        }
 
-
-            for (int i = 0; i < dropdownsToSecondLi.size(); i++) {
-                s = dropdownsToSecondLi.get(i).getText();
-                if (destinationTo.equals(s)) {
-                    element = driver.findElement(By.xpath("//ol[@class='results']/li[2]/ol/li[" + (i + 1) + "]"));
-                    destinationToOnsite = element.getText();
-                    LOG.info(String.format("Destination To on site = %s", element.getText()));
-                    LOG.info(String.format("Destination To checked = %s", destinationTo));
-                }
+        for (int i = 0; i < dropdownsToSecondLi.size(); i++) {
+            s = dropdownsToSecondLi.get(i).getText();
+            if (destinationTo.equals(s)) {
+                element = driver.findElement(By.xpath("//ol[@class='results']/li[2]/ol/li[" + (i + 1) + "]"));
+                destinationToOnsite = element.getText();
+                LOG.info(String.format("Destination To on site = %s", destinationToOnsite));
+                LOG.info(String.format("Destination To checked = %s", destinationTo));
             }
-            Assert.assertEquals(destinationTo, destinationToOnsite);
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            executor.executeScript("arguments[0].click();", element);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
         }
+        Assert.assertEquals(destinationTo, destinationToOnsite);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", element);
+        return destinationToOnsite;
     }
 
 
-    public void fillFromFieldAlternative(String destinationFrom) {
-        try {
-            fromField.click();
-            fromField.sendKeys(destinationFrom);
-            departOnDateField.click();
-            String text = fromFieldAnswer.getAttribute("innerHTML");
-            LOG.info(String.format("Destination From on site = %s", text));
-            LOG.info(String.format("Input destination From  = %s", destinationFrom));
-            Assert.assertEquals(destinationFrom, text);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public String fillFromFieldAlternative(String destinationFrom) {
+        fromField.click();
+        fromField.sendKeys(destinationFrom);
+        departOnDateField.click();
+        String destinationFromOnsite = fromFieldAnswer.getAttribute("innerHTML");
+        LOG.info(String.format("Destination From on site = %s", destinationFromOnsite));
+        LOG.info(String.format("Input destination From  = %s", destinationFrom));
+        Assert.assertEquals(destinationFrom, destinationFromOnsite);
+        return destinationFromOnsite;
     }
 
-    public void fillToFieldAlterntive(String destinationTo) {
-        try {
-            toField.click();
-            toField.sendKeys(destinationTo);
-            departOnDateField.click();
-            String destinationToOnsite = toFieldAnswer.getAttribute("innerHTML");
-            LOG.info(String.format("Destination To on site = %s", destinationToOnsite));
-            LOG.info(String.format("Input destination To = %s", destinationTo));
-            Assert.assertEquals(destinationTo, destinationToOnsite);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public String fillToFieldAlterntive(String destinationTo) {
+        toField.click();
+        toField.sendKeys(destinationTo);
+        departOnDateField.click();
+        String destinationToOnsite = toFieldAnswer.getAttribute("innerHTML");
+        LOG.info(String.format("Destination To on site = %s", destinationToOnsite));
+        LOG.info(String.format("Input destination To = %s", destinationTo));
+        Assert.assertEquals(destinationTo, destinationToOnsite);
+        return destinationToOnsite;
     }
 
-    public void fillDepartOnDateField(String departDate) {
-        try {
-            departOnDateField.click();
-            departOnDateField.clear();
-            departOnDateField.sendKeys(departDate);
-            Thread.sleep(1000);
-            String departOnDateOnsite = departOnDateField.getAttribute("value");
-            LOG.info(String.format("Depart date is = %s", departDate));
-            LOG.info(String.format("Depart date on site is = %s", departOnDateOnsite));
-            Assert.assertEquals(departDate, departOnDateOnsite);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public String fillDepartOnDateField(String departDate) {
+        departOnDateField.click();
+        departOnDateField.clear();
+        departOnDateField.sendKeys(departDate);
+        WaitHelper.waitSeconds(1000);
+        String departOnDateOnsite = departOnDateField.getAttribute("value");
+        LOG.info(String.format("Depart date is = %s", departDate));
+        LOG.info(String.format("Depart date on site is = %s", departOnDateOnsite));
+        Assert.assertEquals(departDate, departOnDateOnsite);
+        return departOnDateOnsite;
     }
 
-    public void fillReturOnDateField(String returnDate) {
-        try {
-            returnOnDateField.click();
-            returnOnDateField.clear();
-            returnOnDateField.sendKeys(returnDate);
-            Thread.sleep(1000);
-            String returnDateOnsite = returnOnDateField.getAttribute("value");
-            LOG.info(String.format("Return date = %s", returnDate));
-            LOG.info(String.format("Return date on site = %s", returnDate));
-            Assert.assertEquals(returnDate, returnDateOnsite);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public String fillReturOnDateField(String returnDate) {
+        returnOnDateField.click();
+        returnOnDateField.clear();
+        returnOnDateField.sendKeys(returnDate);
+        WaitHelper.waitSeconds(1000);
+        String returnDateOnsite = returnOnDateField.getAttribute("value");
+        LOG.info(String.format("Return date = %s", returnDate));
+        LOG.info(String.format("Return date on site = %s", returnDate));
+        Assert.assertEquals(returnDate, returnDateOnsite);
+        return returnDateOnsite;
     }
 
-    public void checkReturnOnDateFieldIsEmpty() {
+    public Boolean checkReturnOnDateFieldIsEmpty() {
         returnOnDateField.click();
         String returnDateOnsite = returnOnDateField.getAttribute("placeholder");
         LOG.info(String.format("Return date on site = %s", returnDateOnsite));
         Assert.assertEquals(returnDateOnsite, "Single flight");
         LOG.info("Return date on site = Single flight is checked");
+        return ("Single flight".equals(returnDateOnsite));
     }
 
     public void uncheckReturnOnCheckbox() {
-        try {
-            if (returnOnCheckbox.isSelected()) {
-                JavascriptExecutor executor = (JavascriptExecutor) driver;
-                executor.executeScript("arguments[0].click();", returnOnCheckbox);
-                LOG.info("Checkbox successfully unchecked");
-                Thread.sleep(3000);
-            } else {
-                LOG.info("By now, checkbox was unchecked");
-            }
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
+        if (returnOnCheckbox.isSelected()) {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            executor.executeScript("arguments[0].click();", returnOnCheckbox);
+            LOG.info("Checkbox successfully unchecked");
+            WaitHelper.waitSeconds(3000);
+        } else {
+            LOG.info("By now, checkbox was unchecked");
         }
     }
 
-    public void clickSearchFlightButton() {
-        try {
-            searchFlightButton.click();
-            LOG.info("Search flight button click");
-            Thread.sleep(5000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+    public BookAFlightPage clickSearchFlightButton() {
+        searchFlightButton.click();
+        LOG.info("Search flight button click");
+        WaitHelper.waitSeconds(5000);
+        return new BookAFlightPage(driver);
     }
 
     public void addAdultsAndChildrenToPassengeres(int adult, int children) {
@@ -380,15 +319,9 @@ public class MainPage extends BasePage {
     }
 
     public BookAFlightPage clickAddMultipleDestinationsLink() {
-        try {
-            addMultipleDestinationsLocator.click();
-            LOG.info("Click Add multiple destinations link");
-            Thread.sleep(5000);
-            return new BookAFlightPage(driver);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
-        return null;
+        addMultipleDestinationsLocator.click();
+        LOG.info("Click Add multiple destinations link");
+        WaitHelper.waitSeconds(5000);
+        return new BookAFlightPage(driver);
     }
 }

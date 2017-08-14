@@ -18,13 +18,11 @@ public class FiveIdTest extends BaseTest {
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
         mainPage.clickIunderstandBtn();
-        mainPage.clickServiceAndThenHandLuggage();
-        ServicePage servicePage = new ServicePage(getDriver());
+        ServicePage servicePage = mainPage.clickServiceAndThenHandLuggage();
         String link = servicePage.getvideoLinkOnsite();
         Assert.assertEquals(LINK, link);
         String name = servicePage.getvideoNameOnsite();
         servicePage.checkVideoNameAndAuthorOnTheVideoPage(name, AUTHOR);
-
         getDriver().close();
     }
 }

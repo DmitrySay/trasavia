@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,15 +40,9 @@ public class BookingOverviewPage extends BasePage {
 
     public String getBookingOverviewPageTitle() {
         String title = "";
-        try {
-            Thread.sleep(5000);
-            title = driver.getTitle();
-            LOG.info(String.format("Booking Overview Page Title = %s", title));
-            return title;
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        WaitHelper.waitSeconds(5000);
+        title = driver.getTitle();
+        LOG.info(String.format("Booking Overview Page Title = %s", title));
         return title;
     }
 
@@ -67,23 +62,18 @@ public class BookingOverviewPage extends BasePage {
     }
 
     public void clickBookingDetails() {
-        try {
-            bookingDetailsLocator.click();
-            LOG.info("Booking details link click");
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            LOG.info(e.getMessage());
-            e.printStackTrace();
-        }
+        bookingDetailsLocator.click();
+        LOG.info("Booking details link click");
+        WaitHelper.waitSeconds(3000);
     }
 
     public String getTotalprice() {
-        LOG.info(String.format("Total price on site is = %s",  totalPriceLocator.getText()));
+        LOG.info(String.format("Total price on site is = %s", totalPriceLocator.getText()));
         return totalPriceLocator.getText();
     }
 
     public String getPaymentAmount() {
-        LOG.info(String.format("Payment amount on site is = %s",  paymentAmountLocator.getText()));
+        LOG.info(String.format("Payment amount on site is = %s", paymentAmountLocator.getText()));
         return paymentAmountLocator.getText();
     }
 
