@@ -7,8 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class BookingOverviewPage extends BasePage {
     private static final Logger LOG = Logger.getLogger(BookingOverviewPage.class);
@@ -33,14 +31,14 @@ public class BookingOverviewPage extends BasePage {
 
     public BookingOverviewPage(WebDriver driver) {
         super(driver);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Booking Overview Page");
+        WaitHelper.waitFeedbackLogo(driver, 15);
+        WaitHelper.waitSeconds(5000);
     }
 
     public String getBookingOverviewPageTitle() {
         String title = "";
-        WaitHelper.waitSeconds(5000);
         title = driver.getTitle();
         LOG.info(String.format("Booking Overview Page Title = %s", title));
         return title;

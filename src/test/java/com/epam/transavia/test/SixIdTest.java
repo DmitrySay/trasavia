@@ -17,14 +17,12 @@ public class SixIdTest extends BaseTest {
         LOG.info("Start runSixIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
         DestinationsPage destinationsPage = mainPage.clickDestinationLink();
         AdvancedSearchPage advancedSearchPage = destinationsPage.clickPerfectDestinationLink();
         advancedSearchPage.fillFromField(FROM);
         advancedSearchPage.clickWhatIsYourBudgetPerPersonLink();
         advancedSearchPage.fillMyBudgetField(MYBUDGET);
         advancedSearchPage.clickSearchButton();
-        advancedSearchPage.checkIfDestinationsAvailable();
         //Assert.assertTrue(advancedSearchPage.checkIfDestinationsAvailable());
         Assert.assertFalse(advancedSearchPage.checkIfDestinationsAvailable());
         getDriver().close();

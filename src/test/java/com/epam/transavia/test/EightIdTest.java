@@ -17,7 +17,6 @@ public class EightIdTest extends BaseTest {
         LOG.info("Start runEightIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
         mainPage.fillFromField(DESTINATIONFROM);
         mainPage.fillToField(DESTINATIONTO);
         BookAFlightPage bookAFlightPage =  mainPage.clickSearchFlightButton();

@@ -25,7 +25,6 @@ public class NineIdTest extends BaseTest {
         LOG.info("Start runNineIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
         BookAFlightPage bookAFlightPage = mainPage.clickAddMultipleDestinationsLink();
 
         String outdestinationFrom = bookAFlightPage.fillFromOutboundField(OUTDESTINATIONFROM);

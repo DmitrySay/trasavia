@@ -48,6 +48,7 @@ public class ChooseAFarePage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Choose A Fare Page");
+        WaitHelper.waitFeedbackLogo(driver, 20);
     }
 
     public void clickPlusTitle() {

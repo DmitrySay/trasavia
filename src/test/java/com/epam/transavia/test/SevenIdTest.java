@@ -19,7 +19,6 @@ public class SevenIdTest extends BaseTest {
         LOG.info("Start runSevenIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
         AdvancedSearchPage advancedSearchPage = mainPage.clickPlanAndBookAndThenAdvancedSearch();
         advancedSearchPage.fillFromField(DESTINATIONFROM);
         advancedSearchPage.fillToField(DESTINATIONTO);

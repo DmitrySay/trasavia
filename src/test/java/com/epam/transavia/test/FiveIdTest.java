@@ -17,7 +17,6 @@ public class FiveIdTest extends BaseTest {
         LOG.info("Start runFiveIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
         ServicePage servicePage = mainPage.clickServiceAndThenHandLuggage();
         String link = servicePage.getvideoLinkOnsite();
         Assert.assertEquals(LINK, link);

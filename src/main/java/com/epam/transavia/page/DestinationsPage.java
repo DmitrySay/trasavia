@@ -1,5 +1,6 @@
 package com.epam.transavia.page;
 
+import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +21,8 @@ public class DestinationsPage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Destinations Page");
+        WaitHelper.waitFeedbackLogo(driver, 15);
+        WaitHelper.waitSeconds(5000);
     }
 
     public AdvancedSearchPage clickPerfectDestinationLink(){

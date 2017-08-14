@@ -20,9 +20,7 @@ public class FourIdTest extends BaseTest {
         LOG.info("Start runFourIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
-        mainPage.clickManageAndThenViewYourBooking();
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPage loginPage = mainPage.clickManageAndThenViewYourBooking();
         BookingOverviewPage bookingOverviewPage = loginPage.doLogin(BOOKINGNUMBER, LASTNAME, FLIGHTDATE);
         assertEquals(BOOKINGOVERVIEWTITLE, bookingOverviewPage.getBookingOverviewPageTitle());
         bookingOverviewPage.clickBookingDetails();

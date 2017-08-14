@@ -15,9 +15,20 @@ public class WaitHelper {
     public WaitHelper(WebDriver driver) {
     }
 
-    public static void waitLogoTtransavia(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+    public static void waitLogoTtransavia(WebDriver driver, long timeOutInSeconds) {
+        LOG.info("Wait Logo Ttransavia");
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("logo-footer")));
+    }
+
+    public static void waitFeedbackLogo(WebDriver driver, long timeOutInSeconds) {
+        LOG.info("Wait FEEDBACK Logo ");
+        WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//div[@class='usabilla_live_button_container']/iframe")));
+        WebElement element = driver.findElement(By.xpath("//div[@class='usabilla_live_button_container']/iframe"));
+        driver.switchTo().frame(element);
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("html/body/img")));
+        driver.switchTo().defaultContent();
     }
 
     public static void waitIsElementPresence(WebDriver driver, By by) {

@@ -61,8 +61,9 @@ public class AdvancedSearchPage extends BasePage {
     public AdvancedSearchPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         LOG.info("Get Access to Advanced Search Page");
+        WaitHelper.waitFeedbackLogo(driver, 15);
+        WaitHelper.waitSeconds(5000);
     }
 
     public void fillFromField(String destinationFrom) {

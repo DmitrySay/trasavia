@@ -18,11 +18,10 @@ public class OneIdTest extends BaseTest {
         LOG.info("Start runOneIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
-        mainPage.fillFromField(DESTINATIONFROM);
-        mainPage.fillToField(DESTINATIONTO);
-//        mainPage.fillFromFieldAlternative(DESTINATIONFROM);
-//        mainPage.fillToFieldAlterntive(DESTINATIONTO);
+//        mainPage.fillFromField(DESTINATIONFROM);
+//        mainPage.fillToField(DESTINATIONTO);
+        mainPage.fillFromFieldAlternative(DESTINATIONFROM);
+        mainPage.fillToFieldAlterntive(DESTINATIONTO);
         mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.uncheckReturnOnCheckbox();
         mainPage.checkReturnOnDateFieldIsEmpty();

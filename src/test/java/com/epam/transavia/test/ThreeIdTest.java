@@ -22,9 +22,7 @@ public class ThreeIdTest extends BaseTest {
     public void runThreeIdTest() {
         LOG.info("Start runThreeIdTest");
         MainPage mainPage = navigate(MainPage.URL);
-        mainPage.clickIunderstandBtn();
-        mainPage.clickManageAndThenViewYourBooking();
-        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPage loginPage = mainPage.clickManageAndThenViewYourBooking();
         String expectedTitle = LOGINTITLE;
         LOG.info(String.format("Expected title  = %s", expectedTitle));
         String actualTitle = loginPage.getloginPageTitle();

@@ -99,8 +99,10 @@ public class MainPage extends BasePage {
 
     public MainPage(WebDriver driver) {
         super(driver);
+        WaitHelper.waitLogoTtransavia(driver, 15);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Main Page");
+        clickIunderstandBtn();
     }
 
     public AdvancedSearchPage clickPlanAndBookAndThenAdvancedSearch() {
@@ -119,14 +121,14 @@ public class MainPage extends BasePage {
         return new DestinationsPage(driver);
     }
 
-    public void clickManageAndThenViewYourBooking() {
+    public LoginPage clickManageAndThenViewYourBooking() {
         manageYourBookingLocator.click();
         WaitHelper.waitSeconds(2000);
         LOG.info(" Manage your booking -click");
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", viewYourBookingLocator);
-        WaitHelper.waitSeconds(2000);
         LOG.info(" View your booking -click");
+        return new LoginPage(driver);
     }
 
     public ServicePage clickServiceAndThenHandLuggage() {
@@ -145,21 +147,20 @@ public class MainPage extends BasePage {
         String checkedHeadline = HEADLINE;
         LOG.info(String.format("Checked headline = %s", checkedHeadline));
         Assert.assertEquals(checkedHeadline, headlineOnsite);
-        WaitHelper.waitSeconds(5000);
     }
 
     public void clickIunderstandBtn() {
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", iunderstendButton);
-        LOG.info("I understand Button click");
         WaitHelper.waitSeconds(5000);
+        iunderstendButton.click();
+        LOG.info("I understand Button click");
+        WaitHelper.waitFeedbackLogo(driver, 15);
     }
 
     public String fillFromField(String destinationFrom) {
         WebElement element = null;
         String s, destinationFromOnsite = "";
         fromField.click();
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitSeconds(1000);
         List<WebElement> dropdownsFrom = driver.findElements(By.xpath("//ol[@class='results']/descendant::li"));
         for (int i = 0; i < dropdownsFrom.size(); i++) {
             s = dropdownsFrom.get(i).getText();
@@ -173,7 +174,7 @@ public class MainPage extends BasePage {
         Assert.assertEquals(destinationFrom, destinationFromOnsite);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitSeconds(1000);
         return destinationFromOnsite;
     }
 
@@ -182,7 +183,6 @@ public class MainPage extends BasePage {
         String s, destinationToOnsite = "";
         toField.click();
         WaitHelper.waitSeconds(1000);
-
         //Destinations from Deperture airport
         List<WebElement> dropdownsToFirthLi = driver.findElements(By.xpath("//ol[@class='results']/li[1]/ol/descendant::li"));
         //Destinations from other airports:
@@ -210,14 +210,15 @@ public class MainPage extends BasePage {
         Assert.assertEquals(destinationTo, destinationToOnsite);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+        WaitHelper.waitSeconds(1000);
         return destinationToOnsite;
     }
-
 
     public String fillFromFieldAlternative(String destinationFrom) {
         fromField.click();
         fromField.sendKeys(destinationFrom);
-        departOnDateField.click();
+        linkText.click();
+        linkText.click();
         String destinationFromOnsite = fromFieldAnswer.getAttribute("innerHTML");
         LOG.info(String.format("Destination From on site = %s", destinationFromOnsite));
         LOG.info(String.format("Input destination From  = %s", destinationFrom));
@@ -228,7 +229,8 @@ public class MainPage extends BasePage {
     public String fillToFieldAlterntive(String destinationTo) {
         toField.click();
         toField.sendKeys(destinationTo);
-        departOnDateField.click();
+        linkText.click();
+        linkText.click();
         String destinationToOnsite = toFieldAnswer.getAttribute("innerHTML");
         LOG.info(String.format("Destination To on site = %s", destinationToOnsite));
         LOG.info(String.format("Input destination To = %s", destinationTo));
@@ -274,7 +276,7 @@ public class MainPage extends BasePage {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", returnOnCheckbox);
             LOG.info("Checkbox successfully unchecked");
-            WaitHelper.waitSeconds(3000);
+            WaitHelper.waitSeconds(1000);
         } else {
             LOG.info("By now, checkbox was unchecked");
         }
@@ -283,7 +285,6 @@ public class MainPage extends BasePage {
     public BookAFlightPage clickSearchFlightButton() {
         searchFlightButton.click();
         LOG.info("Search flight button click");
-        WaitHelper.waitSeconds(5000);
         return new BookAFlightPage(driver);
     }
 
@@ -321,7 +322,6 @@ public class MainPage extends BasePage {
     public BookAFlightPage clickAddMultipleDestinationsLink() {
         addMultipleDestinationsLocator.click();
         LOG.info("Click Add multiple destinations link");
-        WaitHelper.waitSeconds(5000);
         return new BookAFlightPage(driver);
     }
 }

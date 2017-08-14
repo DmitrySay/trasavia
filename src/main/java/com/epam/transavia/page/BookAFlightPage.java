@@ -75,6 +75,8 @@ public class BookAFlightPage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Book A Flight Page");
+        WaitHelper.waitFeedbackLogo(driver, 15);
+        WaitHelper.waitSeconds(5000);
     }
 
 
@@ -243,7 +245,6 @@ public class BookAFlightPage extends BasePage {
     public ChooseAFarePage clickBtnNext() {
         nextBtn.click();
         LOG.info("Click 'NEXT' button");
-        WaitHelper.waitSeconds(5000);
         return new ChooseAFarePage(driver);
 
     }

@@ -19,9 +19,8 @@ public class TwoIdTest extends BaseTest {
         LOG.info("Start runTwoIdTest");
         MainPage mainPage = navigate(MainPage.URL);
         mainPage.checkIsMainPageOpened();
-        mainPage.clickIunderstandBtn();
-        mainPage.fillFromField(DESTINATIONFROM);
-        mainPage.fillToField(DESTINATIONTO);
+        mainPage.fillFromFieldAlternative(DESTINATIONFROM);
+        mainPage.fillToFieldAlterntive(DESTINATIONTO);
         mainPage.fillDepartOnDateField(DEPARTDATE);
         mainPage.fillReturOnDateField(RETURNDATE);
         mainPage.addOneAdultandOneChild();
@@ -31,8 +30,7 @@ public class TwoIdTest extends BaseTest {
         bookAFlightPage.findTitleOutboundFlight();
         bookAFlightPage.selectOutboundFlight();
         bookAFlightPage.selectInboundFlight();
-        bookAFlightPage.clickBtnNext();
-        ChooseAFarePage chooseAFarePage = new ChooseAFarePage(getDriver());
+        ChooseAFarePage chooseAFarePage = bookAFlightPage.clickBtnNext();
         chooseAFarePage.clickPlusTitle();
         chooseAFarePage.checkCorrectCalculations();
         getDriver().close();

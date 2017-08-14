@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 public class ServicePage extends BasePage {
     private static final Logger LOG = Logger.getLogger(MainPage.class);
@@ -27,8 +26,9 @@ public class ServicePage extends BasePage {
     public ServicePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         LOG.info("Get Access to Service Page");
+        WaitHelper.waitFeedbackLogo(driver, 15);
+        WaitHelper.waitSeconds(5000);
     }
 
     public String getvideoLinkOnsite() {

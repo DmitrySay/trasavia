@@ -29,6 +29,8 @@ public class LoginPage extends BasePage {
         super(driver);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Login Page");
+        WaitHelper.waitFeedbackLogo(driver, 15);
+        WaitHelper.waitSeconds(5000);
     }
 
     public String getloginPageTitle() {
