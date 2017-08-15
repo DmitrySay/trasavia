@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class WaitHelper {
     private static final Logger LOG = Logger.getLogger(WaitHelper.class);
 
@@ -32,26 +34,32 @@ public class WaitHelper {
     }
 
     public static void waitIsElementPresence(WebDriver driver, By by) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
     }
 
     public static void waitIsElementClickable(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(element));
-
     }
+
+    public static void waitVisibilityOfAllElements(WebDriver driver, List<WebElement> elements) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
     public static void waitIsElementSelected(WebDriver driver, WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeSelected(element));
     }
+
     public static void waitTitleIs(WebDriver driver, String title) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.titleIs(title));
     }
 
     public static void waitForPageScriptLoad(WebDriver driver) {
-        new WebDriverWait(driver, 30).until((ExpectedCondition<Boolean>) wd ->
+        new WebDriverWait(driver, 20).until((ExpectedCondition<Boolean>) wd ->
                 ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete"));
     }
 
