@@ -27,13 +27,13 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        WaitHelper.waitFeedbackLogo(driver, 15);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Login Page");
-        WaitHelper.waitFeedbackLogo(driver, 15);
-        WaitHelper.waitSeconds(5000);
     }
 
     public String getloginPageTitle() {
+        WaitHelper.waitTitleIs(driver, "Log in");
         String actualTitle = driver.getTitle();
         LOG.info(String.format("Login Page Title = %s", actualTitle));
         return actualTitle;
@@ -43,17 +43,14 @@ public class LoginPage extends BasePage {
             bookingNumberField.click();
             bookingNumberField.sendKeys(bookingNumber);
             LOG.info(String.format("Enter booking = %s", bookingNumber));
-            WaitHelper.waitSeconds(1000);
             lastNameField.click();
             lastNameField.sendKeys(lastName);
             LOG.info(String.format("Enter last name = %s", lastName));
-            WaitHelper.waitSeconds(1000);
             flightDateField.click();
             flightDateField.sendKeys(flightDate);
             LOG.info(String.format("Enter flight date = %s", flightDate));
             bookingNumberField.click();
             bookingNumberField.click();
-            WaitHelper.waitSeconds(1000);
             viewBookingBtn.submit();
             LOG.info("Click 'View booking' Button ");
             return new BookingOverviewPage(driver);

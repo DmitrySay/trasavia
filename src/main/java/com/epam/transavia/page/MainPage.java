@@ -123,10 +123,9 @@ public class MainPage extends BasePage {
 
     public LoginPage clickManageAndThenViewYourBooking() {
         manageYourBookingLocator.click();
-        WaitHelper.waitSeconds(2000);
         LOG.info(" Manage your booking -click");
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", viewYourBookingLocator);
+        WaitHelper.waitIsElementClickable(driver, viewYourBookingLocator);
+        viewYourBookingLocator.click();
         LOG.info(" View your booking -click");
         return new LoginPage(driver);
     }

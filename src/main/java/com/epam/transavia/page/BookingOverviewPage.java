@@ -31,13 +31,13 @@ public class BookingOverviewPage extends BasePage {
 
     public BookingOverviewPage(WebDriver driver) {
         super(driver);
+        WaitHelper.waitFeedbackLogo(driver, 15);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Booking Overview Page");
-        WaitHelper.waitFeedbackLogo(driver, 15);
-        WaitHelper.waitSeconds(5000);
-    }
+     }
 
     public String getBookingOverviewPageTitle() {
+        WaitHelper.waitTitleIs(driver, "View your booking");
         String title = "";
         title = driver.getTitle();
         LOG.info(String.format("Booking Overview Page Title = %s", title));
@@ -60,17 +60,19 @@ public class BookingOverviewPage extends BasePage {
     }
 
     public void clickBookingDetails() {
+        WaitHelper.waitIsElementClickable(driver, bookingDetailsLocator);
         bookingDetailsLocator.click();
         LOG.info("Booking details link click");
-        WaitHelper.waitSeconds(3000);
     }
 
     public String getTotalprice() {
+        WaitHelper.waitIsElementClickable(driver, totalPriceLocator);
         LOG.info(String.format("Total price on site is = %s", totalPriceLocator.getText()));
         return totalPriceLocator.getText();
     }
 
     public String getPaymentAmount() {
+        WaitHelper.waitIsElementClickable(driver, paymentAmountLocator);
         LOG.info(String.format("Payment amount on site is = %s", paymentAmountLocator.getText()));
         return paymentAmountLocator.getText();
     }
