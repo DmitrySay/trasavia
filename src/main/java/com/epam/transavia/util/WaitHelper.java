@@ -43,6 +43,11 @@ public class WaitHelper {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public static void waitIsElementVisibilityOf(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public static void waitVisibilityOfAllElements(WebDriver driver, List<WebElement> elements) {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));

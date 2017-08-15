@@ -157,8 +157,8 @@ public class MainPage extends BasePage {
     public String fillFromField(String destinationFrom) {
         WebElement element = null;
         String s, destinationFromOnsite = "";
+        WaitHelper.waitIsElementClickable(driver, fromField);
         fromField.click();
-        WaitHelper.waitSeconds(1000);
         List<WebElement> dropdownsFrom = driver.findElements(By.xpath("//ol[@class='results']/descendant::li"));
         for (int i = 0; i < dropdownsFrom.size(); i++) {
             s = dropdownsFrom.get(i).getText();
@@ -172,15 +172,14 @@ public class MainPage extends BasePage {
         Assert.assertEquals(destinationFrom, destinationFromOnsite);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        WaitHelper.waitSeconds(1000);
         return destinationFromOnsite;
     }
 
     public String fillToField(String destinationTo) {
         WebElement element = null;
         String s, destinationToOnsite = "";
+        WaitHelper.waitIsElementClickable(driver, toField);
         toField.click();
-        WaitHelper.waitSeconds(1000);
         //Destinations from Deperture airport
         List<WebElement> dropdownsToFirthLi = driver.findElements(By.xpath("//ol[@class='results']/li[1]/ol/descendant::li"));
         //Destinations from other airports:
@@ -208,7 +207,6 @@ public class MainPage extends BasePage {
         Assert.assertEquals(destinationTo, destinationToOnsite);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
-        WaitHelper.waitSeconds(1000);
         return destinationToOnsite;
     }
 
@@ -318,6 +316,7 @@ public class MainPage extends BasePage {
     }
 
     public BookAFlightPage clickAddMultipleDestinationsLink() {
+        WaitHelper.waitIsElementClickable(driver, addMultipleDestinationsLocator);
         addMultipleDestinationsLocator.click();
         LOG.info("Click Add multiple destinations link");
         return new BookAFlightPage(driver);

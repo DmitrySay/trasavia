@@ -73,10 +73,9 @@ public class BookAFlightPage extends BasePage {
 
     public BookAFlightPage(WebDriver driver) {
         super(driver);
+        WaitHelper.waitFeedbackLogo(driver, 15);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Book A Flight Page");
-        WaitHelper.waitFeedbackLogo(driver, 15);
-        WaitHelper.waitSeconds(5000);
     }
 
 
@@ -91,6 +90,7 @@ public class BookAFlightPage extends BasePage {
     }
 
     public String fillFromOutboundField(String outDestinationFrom) {
+        WaitHelper.waitIsElementClickable(driver, outFromField);
         outFromField.click();
         outFromField.sendKeys(outDestinationFrom);
         bookAflightLocator.click();
@@ -101,6 +101,7 @@ public class BookAFlightPage extends BasePage {
     }
 
     public String fillToInboundField(String inDestinationTo) {
+        WaitHelper.waitIsElementClickable(driver, inToField);
         inToField.click();
         inToField.sendKeys(inDestinationTo);
         bookAflightLocator.click();
@@ -143,6 +144,7 @@ public class BookAFlightPage extends BasePage {
     }
 
     public Boolean getMessage() {
+        WaitHelper.waitIsElementVisibilityOf(driver, errorMessageLocator);
         String textErrorOnSite = errorMessageLocator.getText();
         LOG.info(String.format("Error message = %s", textError));
         LOG.info(String.format("Error message on site = %s", textErrorOnSite));
@@ -159,6 +161,7 @@ public class BookAFlightPage extends BasePage {
 
     private boolean isElementPresent(By by) {
         try {
+            WaitHelper.waitIsElementPresence(driver, by);
             driver.findElement(by);
             return true;
         } catch (NoSuchElementException e) {
@@ -180,7 +183,10 @@ public class BookAFlightPage extends BasePage {
      METHOD SELECT ONE DEFAULT (BLUE) FLIGHT FROM 7 DAYS OUTBOUND FLIGHTS
      */
     public void clickSelectOutboundFlight() {
-        driver.findElement(outboundFlightSelectBtn).submit();
+        WaitHelper.waitIsElementPresence(driver, outboundFlightSelectBtn);
+        WebElement element = driver.findElement(outboundFlightSelectBtn);
+        WaitHelper.waitIsElementClickable(driver, element);
+        element.submit();
         LOG.info("Click select outbound flight button");
         WaitHelper.waitSeconds(5000);
     }
@@ -189,7 +195,10 @@ public class BookAFlightPage extends BasePage {
      METHOD SELECT ONE DEFAULT (BLUE) FLIGHT FROM 7 DAYS INBOUND FLIGHTS
      */
     public void clickSelectInboundFlight() {
-        driver.findElement(inboundFlightSelectBtn).submit();
+        WaitHelper.waitIsElementPresence(driver, inboundFlightSelectBtn);
+        WebElement element = driver.findElement(inboundFlightSelectBtn);
+        WaitHelper.waitIsElementClickable(driver, element);
+        element.submit();
         LOG.info("Click select inbound flight button");
         WaitHelper.waitSeconds(5000);
     }

@@ -11,6 +11,9 @@ import org.testng.Assert;
 public class ChooseAFarePage extends BasePage {
     private static final Logger LOG = Logger.getLogger(ChooseAFarePage.class);
 
+    @FindBy(xpath = "//div[@id='top']/div[1]/div[1]/div/div/h1")
+    private WebElement checkTitle;
+
     @FindBy(xpath = "//thead/tr/th[3]")
     private WebElement plusTitle;
 
@@ -46,21 +49,24 @@ public class ChooseAFarePage extends BasePage {
 
     public ChooseAFarePage(WebDriver driver) {
         super(driver);
+        WaitHelper.waitFeedbackLogo(driver, 20);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Choose A Fare Page");
-        WaitHelper.waitFeedbackLogo(driver, 20);
+        Assert.assertEquals("Get more out of your trip! ", checkTitle.getText());
     }
 
     public void clickPlusTitle() {
+        WaitHelper.waitIsElementClickable(driver, plusTitle);
         plusTitle.click();
         LOG.info("Click Plus Title");
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementSelected(driver, plusTitle);
     }
 
     public void clickBtnSelectInPlusTab() {
+        WaitHelper.waitIsElementClickable(driver, selectedPlusBtn);
         selectedPlusBtn.click();
         LOG.info("Click 'select' button in 'plus' tab");
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementSelected(driver, selectedPlusBtn);
     }
 
     /*
@@ -103,15 +109,16 @@ public class ChooseAFarePage extends BasePage {
     Method gets total price
      */
     public double getTotalPrice() {
-        WaitHelper.waitSeconds(3000);
+        WaitHelper.waitIsElementVisibilityOf(driver, totalCostBeforeDotBasic);
         double totalCostBefore = getPricefromElement(totalCostBeforeDotBasic);
         LOG.info(String.format("Total price on site = %.2f", totalCostBefore));
         return totalCostBefore;
     }
 
     public double getDetailPrice() {
+        WaitHelper.waitIsElementClickable(driver, detailsLinklocator);
         detailsLinklocator.click();
-        WaitHelper.waitSeconds(3000);
+        WaitHelper.waitIsElementVisibilityOf(driver, outboundPricelocator);
         double outboundPrice = getPricefromElement(outboundPricelocator);
         LOG.info(String.format("Outbound flight price on site = %.2f", outboundPrice));
         double intboundPrice = getPricefromElement(inboundPricelocator);
