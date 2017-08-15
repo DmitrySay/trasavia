@@ -73,7 +73,6 @@ public class AdvancedSearchPage extends BasePage {
         fromFieldLocator.click();
         fromFieldLocator.sendKeys(destinationFrom);
         LOG.info(String.format("Input destination FROM = %s", destinationFrom));
-        //WaitHelper.waitSeconds(1000);
         String destinationFromOnsite = fromFieldLocator.getAttribute("value");
         LOG.info(String.format("Destination From on site is = %s", destinationFromOnsite));
         Assert.assertEquals(destinationFrom, destinationFromOnsite);

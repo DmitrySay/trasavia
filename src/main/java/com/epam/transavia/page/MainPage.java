@@ -108,10 +108,9 @@ public class MainPage extends BasePage {
     public AdvancedSearchPage clickPlanAndBookAndThenAdvancedSearch() {
         planAndBookLocator.click();
         LOG.info(" Click on 'plan and book' link");
-        WaitHelper.waitSeconds(1000);
+        WaitHelper.waitIsElementClickable(driver, advancedSearchLocator);
         advancedSearchLocator.click();
         LOG.info(" Click on 'advanced search' link");
-        WaitHelper.waitSeconds(5000);
         return new AdvancedSearchPage(driver);
     }
 
@@ -272,7 +271,6 @@ public class MainPage extends BasePage {
             JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", returnOnCheckbox);
             LOG.info("Checkbox successfully unchecked");
-            WaitHelper.waitSeconds(1000);
         } else {
             LOG.info("By now, checkbox was unchecked");
         }
