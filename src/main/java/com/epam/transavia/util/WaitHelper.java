@@ -16,7 +16,7 @@ public class WaitHelper {
     }
 
     public static void waitLogoTtransavia(WebDriver driver, long timeOutInSeconds) {
-        LOG.info("Wait Logo Ttransavia");
+        LOG.info("Wait Logo Transavia");
         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("logo-footer")));
     }
@@ -39,6 +39,15 @@ public class WaitHelper {
     public static void waitIsElementClickable(WebDriver driver, WebElement element) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(element));
+
+    }
+    public static void waitIsElementSelected(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.elementToBeSelected(element));
+    }
+    public static void waitTitleIs(WebDriver driver, String title) {
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.titleIs(title));
     }
 
     public static void waitForPageScriptLoad(WebDriver driver) {
