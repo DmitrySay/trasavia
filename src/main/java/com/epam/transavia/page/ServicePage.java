@@ -25,13 +25,13 @@ public class ServicePage extends BasePage {
 
     public ServicePage(WebDriver driver) {
         super(driver);
+        WaitHelper.waitFeedbackLogo(driver, 15);
         PageFactory.initElements(driver, this);
         LOG.info("Get Access to Service Page");
-        WaitHelper.waitFeedbackLogo(driver, 15);
-        WaitHelper.waitSeconds(5000);
     }
 
     public String getvideoLinkOnsite() {
+        WaitHelper.waitIsElementClickable(driver, iframeLocator);
         driver.switchTo().frame(iframeLocator);
         String videoLinkOnsite = videoNameLocator.getAttribute("href");
         LOG.info(String.format("Video link on site = %s", videoLinkOnsite));
@@ -40,6 +40,7 @@ public class ServicePage extends BasePage {
     }
 
     public String getvideoNameOnsite() {
+        WaitHelper.waitIsElementClickable(driver, iframeLocator);
         driver.switchTo().frame(iframeLocator);
         String videoNameOnsite = videoNameLocator.getText();
         LOG.info(String.format("Video name on site = %s", videoNameOnsite));
@@ -50,8 +51,8 @@ public class ServicePage extends BasePage {
     public void checkVideoNameAndAuthorOnTheVideoPage(String videoName, String videoAuthor) {
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles();
-
         driver.switchTo().frame(iframeLocator);
+        WaitHelper.waitIsElementClickable(driver, videoNameLocator);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", videoNameLocator);
         LOG.info("Click on Video link");
@@ -61,13 +62,12 @@ public class ServicePage extends BasePage {
                            public String apply(WebDriver driver) {
                                Set<String> newWindowsSet = driver.getWindowHandles();
                                newWindowsSet.removeAll(oldWindowsSet);
-                               return newWindowsSet.size() > 0 ?
-                                       newWindowsSet.iterator().next() : null;
+                               return newWindowsSet.size() > 0 ? newWindowsSet.iterator().next() : null;
                            }
                        }
                 );
         driver.switchTo().window(newWindow);
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementPresence(driver, By.xpath("//span[@id='eow-title']"));
         WebElement videoNameOnYoutube = driver.findElement(By.xpath("//span[@id='eow-title']"));
         String vnameOnYoutube = videoNameOnYoutube.getText();
         LOG.info(String.format("Video name on youtube = %s", vnameOnYoutube));
@@ -80,7 +80,6 @@ public class ServicePage extends BasePage {
         driver.switchTo().window(originalWindow);
         Assert.assertEquals(videoName, vnameOnYoutube);
         Assert.assertEquals(videoAuthor, vAuthorOnYoutube);
-
     }
 
 }

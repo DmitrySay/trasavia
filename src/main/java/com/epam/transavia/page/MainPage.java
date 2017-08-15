@@ -132,11 +132,10 @@ public class MainPage extends BasePage {
 
     public ServicePage clickServiceAndThenHandLuggage() {
         serviceLocator.click();
-        WaitHelper.waitSeconds(5000);
         LOG.info(" Service link click");
+        WaitHelper.waitIsElementClickable(driver, handluggageLocator);
         handluggageLocator.click();
         LOG.info(" Hand luggage link click");
-        WaitHelper.waitSeconds(5000);
         return new ServicePage(driver);
     }
 
