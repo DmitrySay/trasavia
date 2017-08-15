@@ -208,6 +208,7 @@ public class BookAFlightPage extends BasePage {
      */
     public void selectOutboundFlight() {
         WebElement fromElement = null;
+        WaitHelper.waitVisibilityOfAllElements(driver, driver.findElements(outboundFlightLocator));
         List<WebElement> elementList = driver.findElements(outboundFlightLocator);
         for (int i = 0; i < elementList.size(); i++) {
             WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
@@ -232,6 +233,7 @@ public class BookAFlightPage extends BasePage {
     */
     public void selectInboundFlight() {
         WebElement toElement = null;
+        WaitHelper.waitVisibilityOfAllElements(driver, driver.findElements(inboundFlightLocator));
         List<WebElement> elementList = driver.findElements(inboundFlightLocator);
         for (int i = 0; i < elementList.size(); i++) {
             WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));

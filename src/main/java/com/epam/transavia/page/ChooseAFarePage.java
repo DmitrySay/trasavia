@@ -59,14 +59,13 @@ public class ChooseAFarePage extends BasePage {
         WaitHelper.waitIsElementClickable(driver, plusTitle);
         plusTitle.click();
         LOG.info("Click Plus Title");
-        WaitHelper.waitIsElementSelected(driver, plusTitle);
+        WaitHelper.waitSeconds(3000);
     }
 
     public void clickBtnSelectInPlusTab() {
         WaitHelper.waitIsElementClickable(driver, selectedPlusBtn);
         selectedPlusBtn.click();
         LOG.info("Click 'select' button in 'plus' tab");
-        WaitHelper.waitIsElementSelected(driver, selectedPlusBtn);
     }
 
     /*
