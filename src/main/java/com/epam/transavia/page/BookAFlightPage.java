@@ -17,7 +17,7 @@ import static org.testng.Assert.fail;
 
 public class BookAFlightPage extends BasePage {
     private static final Logger LOG = Logger.getLogger(BookAFlightPage.class);
-    private static final By locator = By.xpath("//span[@class='price']");
+    private static final By locator = By.xpath("//span[@class='price']/span[1]");
     private static final By outboundFlightTitleLocator = By.xpath("//h2[contains(text(),'Outbound flight')]/text()");
     private static final By inboundFlightTitleLocator = By.xpath("//h2[contains(text(),'Inbound flight')]/text()");
     private static final String textError = "Unfortunately we do not fly from Dubai, United Arab Emirates to Agadir, Morocco. However, we do fly from Dubai, United Arab Emirates to other destinations. Please change your destination and try again.";
@@ -154,9 +154,18 @@ public class BookAFlightPage extends BasePage {
     /*
     METHOD CHECK IS ONE FLIGHT DISPLAYED WITH 'FROM' AND 'PRICE'
     */
-    public void isFlightPresent() {
+    public Boolean isFlightPresent() {
         assertTrue(isElementPresent(locator));
-        LOG.info("A Flight is Displayed");
+        String textOnSite = driver.findElement(locator).getText();
+        LOG.info(String.format("Text field From on site = %s", textOnSite));
+        if ("From".equals(textOnSite.trim())) {
+            LOG.info("A Flight is Displayed");
+            return true;
+        } else {
+            LOG.info("A Flight is NOT Displayed");
+            fail("A Flight is NOT Displayed");
+            return false;
+        }
     }
 
     private boolean isElementPresent(By by) {
