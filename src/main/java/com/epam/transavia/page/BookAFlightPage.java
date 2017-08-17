@@ -2,10 +2,7 @@ package com.epam.transavia.page;
 
 import com.epam.transavia.util.WaitHelper;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -19,15 +16,17 @@ public class BookAFlightPage extends BasePage {
     private static final Logger LOG = Logger.getLogger(BookAFlightPage.class);
     private static final By locator = By.xpath("//span[@class='price']/span[1]");
     private static final By outboundFlightTitleLocator = By.xpath("//h2[contains(text(),'Outbound flight')]/text()");
+    private static final By outboundLocator = By.xpath("//div[@class='outbound']//div[@class='is-enabled']");
     private static final By inboundFlightTitleLocator = By.xpath("//h2[contains(text(),'Inbound flight')]/text()");
+    private static final By inboundLocator = By.xpath("//div[@class='inbound']//div[@class='is-enabled']");
     private static final String textError = "Unfortunately we do not fly from Dubai, United Arab Emirates to Agadir, Morocco. However, we do fly from Dubai, United Arab Emirates to other destinations. Please change your destination and try again.";
     //выбор рейса
     private static final By outboundFlightLocator = By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/descendant::li");
     private static final By inboundFlightLocator = By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/descendant::li");
 
     //select вылет
-    private static final By outboundFlightSelectBtn = By.xpath("//section[@class='flight outbound']/div/div[1]/div[2]/div/div[3]/div/form/div/button");
-    private static final By inboundFlightSelectBtn = By.xpath("//section[@class='flight inbound']/div/div[1]/div[2]/div/div[3]/div/form/div/button");
+    private static final By outboundFlightSelectBtn = By.xpath("//section[@class='flight outbound']/div/div[1]/div[2]/div/div[3]/div/form/div/button/div[3]/div[2]/span");
+    private static final By inboundFlightSelectBtn = By.xpath("//section[@class='flight inbound']/div/div[1]/div[2]/div/div[3]/div/form/div/button/div[3]/div[2]/span");
 
     @FindBy(name = "next_button")
     private WebElement nextBtn;
@@ -197,7 +196,7 @@ public class BookAFlightPage extends BasePage {
         WaitHelper.waitIsElementClickable(driver, element);
         element.submit();
         LOG.info("Click select outbound flight button");
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementPresence(driver, outboundLocator);
     }
 
     /*
@@ -209,7 +208,7 @@ public class BookAFlightPage extends BasePage {
         WaitHelper.waitIsElementClickable(driver, element);
         element.submit();
         LOG.info("Click select inbound flight button");
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementPresence(driver, inboundLocator);
     }
 
     /*
@@ -231,10 +230,12 @@ public class BookAFlightPage extends BasePage {
         }
         fromElement.click();
         LOG.info("Choose firth outbound flight");
+        WaitHelper.waitIsElementPresence(driver, By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/descendant::li//div[contains(@class, 'is-selected')]"));
         WaitHelper.waitSeconds(5000);
-        driver.findElement(outboundFlightSelectBtn).click();
+        WebElement element = driver.findElement(outboundFlightSelectBtn);
+        element.click();
         LOG.info("Click select outbound flight button");
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementPresence(driver, outboundLocator);
     }
 
     /*
@@ -256,22 +257,26 @@ public class BookAFlightPage extends BasePage {
         }
         toElement.click();
         LOG.info("Choose  inbound flight");
+        WaitHelper.waitIsElementPresence(driver, By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/descendant::li//div[contains(@class, 'is-selected')]"));
         WaitHelper.waitSeconds(5000);
-        driver.findElement(inboundFlightSelectBtn).click();
+        WebElement element = driver.findElement(inboundFlightSelectBtn);
+        element.sendKeys(Keys.PAGE_DOWN);
+        element.click();
         LOG.info("Click select inbound flight button");
-        WaitHelper.waitSeconds(5000);
+        WaitHelper.waitIsElementPresence(driver, inboundLocator);
     }
 
     public ChooseAFarePage clickBtnNext() {
         nextBtn.click();
         LOG.info("Click 'NEXT' button");
         return new ChooseAFarePage(driver);
-
     }
 
     public void clickSearchBtn() {
+        WaitHelper.waitIsElementClickable(driver, searchButton);
         searchButton.click();
         LOG.info("Click 'SEARCH' button");
-        WaitHelper.waitSeconds(7000);
+        WaitHelper.waitIsElementPresence(driver, locator);
+        WaitHelper.waitIsElementClickable(driver, nextBtn);
     }
 }
