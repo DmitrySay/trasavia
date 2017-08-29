@@ -30,5 +30,4 @@ public class OneIdTest extends BaseTest {
         bookAFlightPage.isFlightPresent();
         getDriver().close();
     }
-
 }

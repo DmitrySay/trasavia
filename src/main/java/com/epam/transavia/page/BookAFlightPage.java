@@ -219,10 +219,14 @@ public class BookAFlightPage extends BasePage {
         WaitHelper.waitVisibilityOfAllElements(driver, driver.findElements(outboundFlightLocator));
         List<WebElement> elementList = driver.findElements(outboundFlightLocator);
         for (int i = 0; i < elementList.size(); i++) {
-            WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
-            if (el.getAttribute("class").equals("price")) {
-                fromElement = driver.findElement(By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
-                break;
+            try {
+                WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
+                if (el.getAttribute("class").equals("price")) {
+                    fromElement = driver.findElement(By.xpath("//section[@class='flight outbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
+                    break;
+                }
+            } catch (Exception e) {
+                LOG.info("No outbound flight message 'grey empty field'");
             }
         }
         if (fromElement == null) {
@@ -246,10 +250,14 @@ public class BookAFlightPage extends BasePage {
         WaitHelper.waitVisibilityOfAllElements(driver, driver.findElements(inboundFlightLocator));
         List<WebElement> elementList = driver.findElements(inboundFlightLocator);
         for (int i = 0; i < elementList.size(); i++) {
-            WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
-            if (el.getAttribute("class").equals("price")) {
-                toElement = driver.findElement(By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
-                // break;
+            try {
+                WebElement el = elementList.get(i).findElement(By.xpath("div/div/span[1]"));
+                if (el.getAttribute("class").equals("price")) {
+                    toElement = driver.findElement(By.xpath("//section[@class='flight inbound']/div/div[1]/section/div[1]/div/div[2]/div/form/ol/li[" + (i + 1) + "]/div/div/span[1]"));
+                    // break;
+                }
+            } catch (Exception e) {
+                LOG.info("No inbound flight message 'grey empty field'");
             }
         }
         if (toElement == null) {
