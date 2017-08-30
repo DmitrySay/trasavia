@@ -14,7 +14,7 @@ public class SevenIdTest extends BaseTest {
     private static final String MONTH = "September 2017";
     private static final String RESULT = "Nice, France; 29 евро";
 
-    @Test
+    @Test(priority = 7)
     public void runSevenIdTest() {
         LOG.info("Start runSevenIdTest");
         MainPage mainPage = navigate(MainPage.URL);

@@ -12,7 +12,7 @@ public class EightIdTest extends BaseTest {
     private static final String DESTINATIONFROM ="Dubai, United Arab Emirates";
     private static final String DESTINATIONTO ="Agadir, Morocco";
 
-    @Test
+    @Test(priority = 8)
     public void runEightIdTest(){
         LOG.info("Start runEightIdTest");
         MainPage mainPage = navigate(MainPage.URL);

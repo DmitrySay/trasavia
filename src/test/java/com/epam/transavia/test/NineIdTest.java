@@ -20,7 +20,7 @@ public class NineIdTest extends BaseTest {
     private static final String INDESTINATIONTO = "Casablanca, Morocco";
     private static final String INDEPARTDATE = "8 Sep 2017";
 
-    @Test
+    @Test(priority = 9)
     public void runNineIdTest() {
         LOG.info("Start runNineIdTest");
         MainPage mainPage = navigate(MainPage.URL);

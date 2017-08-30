@@ -13,7 +13,7 @@ public class OneIdTest extends BaseTest {
     private static final String DEPARTDATE ="20 Sep 2017";
 
 
-    @Test
+    @Test(priority = 1)
     public void runOneIdTest(){
         LOG.info("Start runOneIdTest");
         MainPage mainPage = navigate(MainPage.URL);

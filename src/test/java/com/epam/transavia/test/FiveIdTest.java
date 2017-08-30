@@ -12,7 +12,7 @@ public class FiveIdTest extends BaseTest {
     private static final String AUTHOR = "Transavia";
     private static final String LINK = "https://www.youtube.com/watch?v=fQMuhniqWAg";
 
-    @Test
+    @Test(priority = 5)
     public void runFiveIdTest() {
         LOG.info("Start runFiveIdTest");
         MainPage mainPage = navigate(MainPage.URL);

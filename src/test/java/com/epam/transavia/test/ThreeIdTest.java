@@ -18,7 +18,7 @@ public class ThreeIdTest extends BaseTest {
     private static final String LOGINTITLE = "Log in";
     private static final String BOOKINGOVERVIEWTITLE = "View your booking";
 
-    @Test
+    @Test(priority = 3)
     public void runThreeIdTest() {
         LOG.info("Start runThreeIdTest");
         MainPage mainPage = navigate(MainPage.URL);

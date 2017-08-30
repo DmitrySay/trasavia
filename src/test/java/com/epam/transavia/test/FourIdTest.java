@@ -15,7 +15,7 @@ public class FourIdTest extends BaseTest {
     private static final String FLIGHTDATE = "9 June 2016";
     private static final String BOOKINGOVERVIEWTITLE = "View your booking";
 
-    @Test
+    @Test(priority = 4)
     public void runFourIdTest() {
         LOG.info("Start runFourIdTest");
         MainPage mainPage = navigate(MainPage.URL);

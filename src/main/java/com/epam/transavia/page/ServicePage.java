@@ -67,12 +67,23 @@ public class ServicePage extends BasePage {
                        }
                 );
         driver.switchTo().window(newWindow);
-        WaitHelper.waitIsElementPresence(driver, By.xpath("//span[@id='eow-title']"));
-        WebElement videoNameOnYoutube = driver.findElement(By.xpath("//span[@id='eow-title']"));
+
+        WebElement videoNameOnYoutube;
+        WebElement videoAuthorOnYoutube;
+        try {
+            WaitHelper.waitIsElementPresence(driver, By.xpath("//span[@id='eow-title']"));
+            videoNameOnYoutube = driver.findElement(By.xpath("//span[@id='eow-title']"));
+            videoAuthorOnYoutube = driver.findElement(By.xpath("//div[@id='watch7-user-header']/div/a"));
+        } catch (Exception e) {
+            WaitHelper.waitIsElementPresence(driver, By.xpath("//div[@id='container']/h1"));
+            videoNameOnYoutube = driver.findElement(By.xpath("//div[@id='container']/h1"));
+            videoAuthorOnYoutube = driver.findElement(By.xpath("//div[@id='owner-container']//a"));
+        }
+
         String vnameOnYoutube = videoNameOnYoutube.getText();
         LOG.info(String.format("Video name on youtube = %s", vnameOnYoutube));
         LOG.info(String.format("Video name on site = %s", videoName));
-        WebElement videoAuthorOnYoutube = driver.findElement(By.xpath("//div[@id='watch7-user-header']/div/a"));
+
         String vAuthorOnYoutube = videoAuthorOnYoutube.getText();
         LOG.info(String.format("Video author on youtube = %s", vAuthorOnYoutube));
         LOG.info(String.format("Video author on site = %s", videoAuthor));

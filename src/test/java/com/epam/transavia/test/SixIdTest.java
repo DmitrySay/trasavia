@@ -12,7 +12,7 @@ public class SixIdTest extends BaseTest {
     private static final String FROM = "Innsbruck, Austria";
     private static final String MYBUDGET = "200";
 
-    @Test
+    @Test(priority = 6)
     public void runSixIdTest() {
         LOG.info("Start runSixIdTest");
         MainPage mainPage = navigate(MainPage.URL);

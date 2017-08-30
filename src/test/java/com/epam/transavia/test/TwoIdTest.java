@@ -14,7 +14,7 @@ public class TwoIdTest extends BaseTest {
     private static final String RETURNDATE = "25 Sep 2017";
 
 
-    @Test
+    @Test(priority = 2)
     public void runTwoIdTest() {
         LOG.info("Start runTwoIdTest");
         MainPage mainPage = navigate(MainPage.URL);
