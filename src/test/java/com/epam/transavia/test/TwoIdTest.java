@@ -32,6 +32,7 @@ public class TwoIdTest extends BaseTest {
         bookAFlightPage.selectInboundFlight();
         ChooseAFarePage chooseAFarePage = bookAFlightPage.clickBtnNext();
         chooseAFarePage.clickPlusTitle();
+        chooseAFarePage.clickBtnSelectInPlusTab();
         chooseAFarePage.checkCorrectCalculations();
         getDriver().close();
     }
