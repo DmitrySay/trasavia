@@ -11,8 +11,8 @@ public class SevenIdTest extends BaseTest {
     private static final String DESTINATIONFROM = "Netherlands";
     private static final String DESTINATIONTO = "France";
     private static final String SINGLEFLIGHT = "Single flight";
-    private static final String MONTH = "September 2017";
-    private static final String RESULT = "Nice, France; 29 евро";
+    private static final String MONTH = "October 2017";
+    private static final String RESULT = "Corsica (Ajaccio), France; 29 евро";
 
     @Test(priority = 7)
     public void runSevenIdTest() {

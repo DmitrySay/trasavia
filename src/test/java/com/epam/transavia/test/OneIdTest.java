@@ -10,7 +10,7 @@ public class OneIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(OneIdTest.class);
     private static final String DESTINATIONFROM ="Amsterdam (Schiphol), Netherlands";
     private static final String DESTINATIONTO ="Antalya, Turkey";
-    private static final String DEPARTDATE ="20 Sep 2017";
+    private static final String DEPARTDATE ="20 Oct 2017";
 
 
     @Test(priority = 1)

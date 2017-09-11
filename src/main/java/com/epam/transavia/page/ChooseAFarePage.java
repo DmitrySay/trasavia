@@ -65,6 +65,7 @@ public class ChooseAFarePage extends BasePage {
     public void clickBtnSelectInPlusTab() {
         WaitHelper.waitIsElementClickable(driver, selectedPlusBtn);
         selectedPlusBtn.click();
+        WaitHelper.waitSeconds(3000);
         LOG.info("Click 'select' button in 'plus' tab");
     }
 
@@ -94,14 +95,13 @@ public class ChooseAFarePage extends BasePage {
         double totalCostBefore = getPricefromElement(totalCostBeforeDot);
         LOG.info(String.format(" Total price Before = %.2f", totalCostBefore));
         double calculate = 3 * priceOnePerson + 3 * extraPriceOnePerson;
-        double total = totalCostBefore;
         LOG.info(String.format("Calculate price = %.2f", calculate));
-        LOG.info(String.format("Total price = %.2f", total));
-        Assert.assertEquals(total, calculate);
-        clickBtnSelectInPlusTab();
-        double totalPrice = getPricefromElement(totalCostlocator);
-        LOG.info(String.format("Total price after click 'select' button = %.2f", totalPrice));
-        Assert.assertEquals(totalPrice, calculate);
+        LOG.info(String.format("Total price = %.2f", totalCostBefore));
+        Assert.assertEquals(totalCostBefore, calculate);
+       // clickBtnSelectInPlusTab();
+//        double totalPrice = getPricefromElement(totalCostlocator);
+//        LOG.info(String.format("Total price after click 'select' button = %.2f", totalPrice));
+//        Assert.assertEquals(totalPrice, calculate);
     }
 
     /*

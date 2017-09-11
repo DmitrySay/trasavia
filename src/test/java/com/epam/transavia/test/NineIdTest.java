@@ -13,12 +13,12 @@ public class NineIdTest extends BaseTest {
     //Outbound flight
     private static final String OUTDESTINATIONFROM = "Bologna, Italy";
     private static final String OUTDESTINATIONTO = "Eindhoven, Netherlands";
-    private static final String OUTDEPARTDATE = "2 Sep 2017";
+    private static final String OUTDEPARTDATE = "8 Oct 2017";
 
     // Inbound flight
     private static final String INDESTINATIONFROM = "Amsterdam (Schiphol), Netherlands";
     private static final String INDESTINATIONTO = "Casablanca, Morocco";
-    private static final String INDEPARTDATE = "8 Sep 2017";
+    private static final String INDEPARTDATE = "10 Oct 2017";
 
     @Test(priority = 9)
     public void runNineIdTest() {
@@ -41,8 +41,10 @@ public class NineIdTest extends BaseTest {
         assertEquals(INDEPARTDATE, inDepartDate);
 
         bookAFlightPage.clickSearchBtn();
-        bookAFlightPage.clickSelectOutboundFlight();
-        bookAFlightPage.clickSelectInboundFlight();
+        //bookAFlightPage.clickSelectOutboundFlight();
+        //bookAFlightPage.clickSelectInboundFlight();
+        bookAFlightPage.selectInboundFlight();
+        bookAFlightPage.selectOutboundFlight();
 
         ChooseAFarePage chooseAFarePage = bookAFlightPage.clickBtnNext();
         double totalPrice =chooseAFarePage.getTotalPrice();

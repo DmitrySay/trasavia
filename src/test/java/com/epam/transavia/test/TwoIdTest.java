@@ -10,8 +10,8 @@ public class TwoIdTest extends BaseTest {
     private static final Logger LOG = Logger.getLogger(TwoIdTest.class);
     private static final String DESTINATIONFROM = "Dublin, Ireland";
     private static final String DESTINATIONTO = "Paris (Orly South), France";
-    private static final String DEPARTDATE = "20 Sep 2017";
-    private static final String RETURNDATE = "25 Sep 2017";
+    private static final String DEPARTDATE = "20 Oct 2017";
+    private static final String RETURNDATE = "25 Oct 2017";
 
 
     @Test(priority = 2)
